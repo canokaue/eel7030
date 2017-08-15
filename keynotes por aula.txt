@@ -1,0 +1,20 @@
+---Aula 1----
+
+Utilizar ctrl+F5 para entrar no modo debug;
+
+View/Memory Window para representação gráfica das memórias selecionadas;
+
+F11 roda step;
+
+CLick RST;
+
+
+EX 1 -------
+
+MOV A, 0x01
+
+ADD A, R2
+
+MOV 0x00, A
+
+
