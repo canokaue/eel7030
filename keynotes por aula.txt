@@ -9,12 +9,8 @@ F11 roda step;
 CLick RST;
 
 
-EX 1 -------
+---Aula 2----
 
-MOV A, 0x01
-
-ADD A, R2
-
-MOV 0x00, A
-
+INICIO EQU 0H    ---- Comunicação com o compilador KEIL, não entra na memória de código:   define INICIO 0x0
+ORG INICIO       ----   Define local-origem de execução
 
