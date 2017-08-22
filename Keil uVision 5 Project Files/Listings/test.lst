@@ -1,0 +1,59 @@
+A51 MACRO ASSEMBLER  TEST                                                                 08/22/2017 15:05:18 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\test.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE ..\ASMs\test.asm SET(SMALL) DEBUG PRINT(.\Listings\test.lst) OBJECT(.\O
+                      bjects\test.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1                                 ;Exercício 3 Aula 2
+  0000                 2     RESET   EQU 0H
+  0060                 3     VETOR   EQU 60H
+0000                   4                             ORG RESET                 ; PC = 0000H ao se resetar o 8051        
+                                          MOV DPTR,#NRO          ; endereco nro parcelas a ser somado
+0000 900060            5                             MOV DPTR,#NRO
+0003 93                6                             MOVC A,@A+DPTR
+0004 FB                7                             MOV R3,A                   ; R3 = nro parcelas a ser somado
+0005 900061            8                             MOV DPTR,#DADOS      ; end. vetor de dados a ser somado
+0008 7A00              9                             MOV R2, #0
+000A 7901             10                             MOV R1, #01
+                      11     
+000C E8               12     VOLTA:          MOV A,R0
+000D 93               13                             MOVC A,@A+DPTR       ; le parcela
+000E 6005             14                             JZ FIM
+0010 2A               15                             ADD A,R2
+0011 F3               16                             MOVX @R1,A
+0012 08               17                             INC R0
+0013 DBF7             18                             DJNZ R3,VOLTA
+                      19                             
+0015 80FE             20     FIM:            JMP FIM
+0060                  21                             ORG VETOR
+                      22                                     
+0060 03               23     NRO:    DB 03H
+                      24             
+0061 01030506         25     DADOS:  DB 01H,03H,05H,06H,0AH,0E2H
+0065 0AE2                    
+                      26             
+                      27     END
+A51 MACRO ASSEMBLER  TEST                                                                 08/22/2017 15:05:18 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DADOS. . . . . . .  C ADDR   0061H   A   
+FIM. . . . . . . .  C ADDR   0015H   A   
+NRO. . . . . . . .  C ADDR   0060H   A   
+RESET. . . . . . .  N NUMB   0000H   A   
+VETOR. . . . . . .  N NUMB   0060H   A   
+VOLTA. . . . . . .  C ADDR   000CH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

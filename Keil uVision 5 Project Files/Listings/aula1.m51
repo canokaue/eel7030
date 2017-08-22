@@ -1,0 +1,59 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        08/22/2017  15:05:18  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\test.obj TO .\Objects\aula1 PRINT (.\Listings\aula1.m51)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\test.obj (TEST)
+
+
+LINK MAP OF MODULE:  .\Objects\aula1 (TEST)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0067H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\aula1 (TEST)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TEST
+  C:0061H         SYMBOL        DADOS
+  C:0015H         SYMBOL        FIM
+  C:0060H         SYMBOL        NRO
+  N:0000H         SYMBOL        RESET
+  N:0060H         SYMBOL        VETOR
+  C:000CH         SYMBOL        VOLTA
+  C:0000H         LINE#         5
+  C:0003H         LINE#         6
+  C:0004H         LINE#         7
+  C:0005H         LINE#         8
+  C:0008H         LINE#         9
+  C:000AH         LINE#         10
+  C:000CH         LINE#         12
+  C:000DH         LINE#         13
+  C:000EH         LINE#         14
+  C:0010H         LINE#         15
+  C:0011H         LINE#         16
+  C:0012H         LINE#         17
+  C:0013H         LINE#         18
+  C:0015H         LINE#         20
+  -------         ENDMOD        TEST
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 001EH BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=103
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
