@@ -1,8 +1,8 @@
----Aula 1----
+---Aula 1---
 
 Utilizar ctrl+F5 para entrar no modo debug;
 
-View/Memory Window para representação gráfica das memórias selecionadas;
+View/Memory Window para representaÃ§Ã£o grÃ¡fica das memÃ³rias selecionadas;
 
 F11 roda step;
 
@@ -13,4 +13,5 @@ CLick RST;
 
 INICIO EQU 0H    ---- Comunicação com o compilador KEIL, não entra na memória de código:   define INICIO 0x0
 ORG INICIO       ----   Define local-origem de execução
+
 
