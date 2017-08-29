@@ -11,7 +11,10 @@ CLick RST;
 
 ---Aula 2----
 
-INICIO EQU 0H    ---- Comunicação com o compilador KEIL, não entra na memória de código:   define INICIO 0x0
-ORG INICIO       ----   Define local-origem de execução
+INICIO EQU 0H    ---- Comunicação com o compilador KEIL, não entra na memória de código:   define INICIO 0x0;
+ORG INICIO       ----   Define local-origem de execução;
 
+---Aula 3---
+
+$ endereço da linha atual;
 
