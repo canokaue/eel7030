@@ -1,0 +1,14 @@
+reset  equ 00h
+ltint0 equ 03h ; tratador int0
+delay  equ 0FEh ;definição do valor de atraso
+
+org reset
+jmp start ; pula ltint0
+
+org ltint0
+reti
+
+start:
+		mov ie #10000001B
+		setb it0 ; borda de descida
+		
