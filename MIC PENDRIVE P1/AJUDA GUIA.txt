@@ -1,0 +1,25 @@
+Laboratório 2
+
+2.1 >> Salvar em memória externa
+2.2 >> Desvio de Fluxo em caso de zero
+2.3 >> Usar ADDC salvando apenas o carry na memória externa
+2.4 >> Loop para escrever 5 valores em memória interna e externa
+2.5 >> Loop para copiar dados de memória externa e colar em externa também
+
+Laboratório 3
+
+3.1 >> Mostrar em um display 7-seg o número pressionado em P2 (switch bank)
+3.2 >> Mostrar em um display 7-seg o num. de chaves pressionadas em P2
+3.3 >> Contador decrescente de 9 à 0 no display 0
+3.4 >> Utilizar delay sem alterar registradores
+3.5 >> Rotacionar led para a esquerda com delay
+3.6 >> Acender um-a-um todos os leds saindo da esquerda e então apagá-los saindo da direita
+3.7 >> Dados no switchbank definem a direção e quantidade de leds rotacionados
+3.8 >> Ler keypad e jogar em display de 7-seg
+
+Laboratório 4
+
+4.1 >> Usar intex1 para habilitar/desabilitar intex0 que vai escrever 'microcontrolador'
+4.2 >> Usar intex0 para parar/continuar um contador
+4.3 >> Intex1 escreve caracteres em p1 e intex0 grava o último caracter escrito na memória externa
+4.4 >> Intex0 define se led rotaciona pra esquerda/direita, intex1 define se rotação para ou vai
