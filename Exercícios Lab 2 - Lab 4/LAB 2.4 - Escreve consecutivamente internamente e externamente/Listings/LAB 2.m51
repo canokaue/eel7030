@@ -1,0 +1,57 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        04/04/2017  17:29:40  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\LAB 2.4_PROG_ESCREVE_NUM_EM_POSIÇOES_DETERMINADAS_MEMORIA_INTER_E_EXTERNA.obj TO .
+>> \Objects\LAB 2.4_PROG_ESCREVE_NUM_EM_POSIÇOES_DETERMINADAS_MEMORIA_INTER_E_EXTERNA PRINT (.\Listings\LAB 2.m51)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\LAB 2.4_PROG_ESCREVE_NUM_EM_POSIÇOES_DETERMINADAS_MEMORIA_INTER_E_EXTERNA.obj (LAB_2_4_PROG_ESCREVE_NUM_EM_P
+>> OSI_OES_DETE)
+
+
+LINK MAP OF MODULE:  .\Objects\LAB 2.4_PROG_ESCREVE_NUM_EM_POSIÇOES_DETERMINADAS_MEMORIA_INTER_E_EXTERNA (LAB_2_4_PROG_E
+>> SCREVE_NUM_EM_POSI_OES_DETE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0013H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\LAB 2.4_PROG_ESCREVE_NUM_EM_POSIÇOES_DETERMINADAS_MEMORIA_INTER_E_EXTERNA (LAB_2_4_PR
+>> OG_ESCREVE_NUM_EM_POSI_OES_DETE)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        LAB_2_4_PROG_ESCREVE_NUM_EM_POSI_OES_DETE
+  D:00A0H         SYMBOL        P2
+  N:0000H         SYMBOL        RESET
+  C:0009H         SYMBOL        VOLTA
+  C:0000H         LINE#         5
+  C:0002H         LINE#         7
+  C:0005H         LINE#         8
+  C:0007H         LINE#         9
+  C:0009H         LINE#         11
+  C:000AH         LINE#         12
+  C:000BH         LINE#         13
+  C:000CH         LINE#         14
+  C:000DH         LINE#         15
+  C:000EH         LINE#         16
+  C:0011H         LINE#         17
+  -------         ENDMOD        LAB_2_4_PROG_ESCREVE_NUM_EM_POSI_OES_DETE
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0013H BYTE ( 0%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=19
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

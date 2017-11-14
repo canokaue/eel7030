@@ -1,0 +1,88 @@
+A51 MACRO ASSEMBLER  LAB_3_0                                                              04/07/2017 15:18:36 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\LAB 3.0.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LAB 3.0.asm SET(SMALL) DEBUG PRINT(.\Listings\LAB 3.0.lst) OBJECT(.\Obj
+                      ects\LAB 3.0.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0087                 1     CS EQU P0.7
+
+  00B3                 2     END0 EQU P3.3;
+
+  00B4                 3     END1 EQU P3.4;
+
+0000                   4                                             ORG 0h
+
+0000 C2B3              5                                             CLR END0
+
+0002 C2B4              6                                             CLR END1
+
+0004 D287              7                                             SETB CS
+
+                       8                                             
+
+0006 E5A0              9     VOLTA:                          MOV A,P2
+
+0008 F4               10                                             CPL A ; INVERTE O NIVEL LOGICO -- PORTA P2 VEM COM 
+                             O NIVEL LOGICO INVERTIDO 
+
+                      11                                             
+
+0009 110F             12                                             CALL CONVERTE
+
+                      13                                             
+
+                      14                                             
+
+000B F590             15                                             MOV P1,A
+
+                      16                                             
+
+000D 80F7             17                                             JMP VOLTA
+
+000F                  18     CONVERTE: 
+
+000F 04               19                             INC A ; SE ENCREMENTA O A PARA PARA PC PEGAR O VALOR DA TABELA
+
+                      20     
+
+0010 83               21                             MOVC A,@A+PC
+
+0011 22               22                             RET
+
+                      23     
+
+0012 40792430         24     TABELA: DB 40H, 79H, 24H, 30H, 19H, 12H, 02H, 78H, 00H, 10H, 08H, 03H, 46H,21H, 06H, 0EH
+
+0016 19120278                
+001A 00100803                
+001E 4621060E                
+                      25     END
+
+A51 MACRO ASSEMBLER  LAB_3_0                                                              04/07/2017 15:18:36 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CONVERTE . . . . .  C ADDR   000FH   A   
+CS . . . . . . . .  B ADDR   0080H.7 A   
+END0 . . . . . . .  B ADDR   00B0H.3 A   
+END1 . . . . . . .  B ADDR   00B0H.4 A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+TABELA . . . . . .  C ADDR   0012H   A   
+VOLTA. . . . . . .  C ADDR   0006H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -26,7 +26,7 @@ Laboratório 8
 8.5 >> Acende e apaga leds ordenadamente com delay
 
 
-Exemplos de Prova
+Exemplos de Prova 2
 
 ex1 >> Receber bits à 1.2k e salvar ciclicamente em memória externa
 ex2 >> Timer1 no modo 2 para enviar caracteres para memória externa ciclicamente

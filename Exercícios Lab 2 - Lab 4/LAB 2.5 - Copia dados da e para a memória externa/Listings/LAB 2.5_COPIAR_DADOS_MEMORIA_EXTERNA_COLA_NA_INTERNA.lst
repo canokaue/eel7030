@@ -1,0 +1,79 @@
+A51 MACRO ASSEMBLER  LAB_2_5_COPIAR_DADOS_MEMORIA_EXTERNA_COLA                            04/07/2017 14:38:47 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\LAB 2.5_COPIAR_DADOS_MEMORIA_EXTERNA_COLA_NA_INTERNA.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LAB 2.5_COPIAR_DADOS_MEMORIA_EXTERNA_COLA_NA_INTERNA.asm SET(SMALL) DEB
+                      UG PRINT(.\Listings\LAB 2.5_COPIAR_DADOS_MEMORIA_EXTERNA_COLA_NA_INTERNA.lst) OBJECT(.\Objects\LAB
+                       2.5_COPIAR_DADOS_MEMORIA_EXTERNA_COLA_NA_INTERNA.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0000                 1     RESET EQU 0H
+
+0000                   2                                             ORG RESET ; PC = 0000H ao se resetar o 8051
+
+                       3                                                     
+
+0000 7400              4     INICIO:                         MOV A,#0
+
+0002 7B0F              5                                             MOV R3,#0FH
+
+                       6                                             
+
+                       7                                             
+
+0004 7800              8                                             MOV R0,#00H
+
+0006 7900              9                                             MOV R1,#00H
+
+                      10                                             
+
+0008                  11     VOLTA:                          
+
+0008 75A021           12                                             MOV P2,#21H
+
+000B E2               13                                             MOVX A,@R0
+
+                      14                                             
+
+000C AAA0             15                                             MOV R2,P2
+
+000E 75A023           16                                             MOV P2,#23H
+
+                      17                                             
+
+0011 F3               18                                             MOVX @R1,A
+
+                      19                             
+
+0012 08               20                                             INC R0
+
+0013 09               21                                             INC R1                                  
+
+0014 8AA0             22                                             MOV P2,R2
+
+0016 DBF0             23                                             DJNZ R3,VOLTA
+
+0018 80E6             24                                             JMP INICIO
+
+                      25                                             END
+
+A51 MACRO ASSEMBLER  LAB_2_5_COPIAR_DADOS_MEMORIA_EXTERNA_COLA                            04/07/2017 14:38:47 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+INICIO . . . . . .  C ADDR   0000H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+RESET. . . . . . .  N NUMB   0000H   A   
+VOLTA. . . . . . .  C ADDR   0008H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,70 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        04/04/2017  17:09:44  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\LAB 2.3_COD_ADDC_ EXCEDE_FF.obj TO .\Objects\LAB 2.3_COD_ADDC_ EXCEDE_FF PRINT (.\
+>> Listings\LAB 2.3_COD_ADDC_ EXCEDE_FF.m51)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\LAB 2.3_COD_ADDC_ EXCEDE_FF.obj (LAB_2_3_COD_ADDC__EXCEDE_FF)
+
+
+LINK MAP OF MODULE:  .\Objects\LAB 2.3_COD_ADDC_ EXCEDE_FF (LAB_2_3_COD_ADDC__EXCEDE_FF)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0070H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\LAB 2.3_COD_ADDC_ EXCEDE_FF (LAB_2_3_COD_ADDC__EXCEDE_FF)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        LAB_2_3_COD_ADDC__EXCEDE_FF
+  C:0061H         SYMBOL        DADOS
+  C:0020H         SYMBOL        FIM
+  C:0060H         SYMBOL        NRO
+  D:00A0H         SYMBOL        P2
+  N:0000H         SYMBOL        RESET
+  N:0060H         SYMBOL        VETOR
+  C:0010H         SYMBOL        VOLTA
+  C:0000H         LINE#         5
+  C:0003H         LINE#         6
+  C:0005H         LINE#         7
+  C:0006H         LINE#         8
+  C:0007H         LINE#         9
+  C:000AH         LINE#         10
+  C:000CH         LINE#         11
+  C:000EH         LINE#         12
+  C:0010H         LINE#         13
+  C:0011H         LINE#         14
+  C:0012H         LINE#         15
+  C:0013H         LINE#         16
+  C:0014H         LINE#         18
+  C:0016H         LINE#         19
+  C:0017H         LINE#         20
+  C:001AH         LINE#         21
+  C:001CH         LINE#         22
+  C:001DH         LINE#         24
+  C:001EH         LINE#         25
+  C:0020H         LINE#         28
+  -------         ENDMOD        LAB_2_3_COD_ADDC__EXCEDE_FF
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2017  17:09:44  PAGE 2
+
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0032H BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=112
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

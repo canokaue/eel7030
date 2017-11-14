@@ -1,0 +1,70 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        04/11/2017  18:05:39  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\LAB 3.3_CONTA_DECRESCENTE_COM_ATRASO_SUB_ROTINA.obj TO .\Objects\LAB 3.5 PRINT (.\
+>> Listings\LAB 3.m51)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\LAB 3.3_CONTA_DECRESCENTE_COM_ATRASO_SUB_ROTINA.obj (LAB_3_3_CONTA_DECRESCENTE_COM_ATRASO_SUB_)
+
+
+LINK MAP OF MODULE:  .\Objects\LAB 3.5 (LAB_3_3_CONTA_DECRESCENTE_COM_ATRASO_SUB_)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     002BH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\LAB 3.5 (LAB_3_3_CONTA_DECRESCENTE_COM_ATRASO_SUB_)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        LAB_3_3_CONTA_DECRESCENTE_COM_ATRASO_SUB_
+  N:00FEH         SYMBOL        ATRASO
+  C:000AH         SYMBOL        CONTA
+  C:0019H         SYMBOL        CONVERTE
+  B:0080H.7       SYMBOL        CS
+  C:0015H         SYMBOL        DELAY
+  B:00B0H.3       SYMBOL        END0
+  B:00B0H.4       SYMBOL        END1
+  D:0080H         SYMBOL        P0
+  D:0090H         SYMBOL        P1
+  D:00B0H         SYMBOL        P3
+  C:001BH         SYMBOL        TABELA
+  N:0022H         SYMBOL        VARIAVELATRASO
+  C:0008H         SYMBOL        VOLTA
+  C:0000H         LINE#         9
+  C:0002H         LINE#         10
+  C:0004H         LINE#         11
+  C:0006H         LINE#         12
+  C:0008H         LINE#         14
+  C:000AH         LINE#         17
+  C:000CH         LINE#         18
+  C:000EH         LINE#         19
+  C:0011H         LINE#         21
+  C:0013H         LINE#         23
+  C:0015H         LINE#         25
+  C:0018H         LINE#         26
+  C:0019H         LINE#         28
+  C:001AH         LINE#         29
+  -------         ENDMOD        LAB_3_3_CONTA_DECRESCENTE_COM_ATRASO_SUB_
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/11/2017  18:05:39  PAGE 2
+
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 002BH BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=43
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
