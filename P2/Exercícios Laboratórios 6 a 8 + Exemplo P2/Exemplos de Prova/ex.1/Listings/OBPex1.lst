@@ -1,0 +1,136 @@
+A51 MACRO ASSEMBLER  OBPEX1                                                               06/24/2017 12:02:32 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\OBPex1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE OBPex1.asm SET(SMALL) DEBUG PRINT(.\Listings\OBPex1.lst) OBJECT(.\Objec
+                      ts\OBPex1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0000                 1     RESET           EQU             00H                                             ;local onde
+                              estará escrito o programa
+
+  0023                 2     LTSERIAL        EQU             23H                                             ;local do t
+                             ratador de interrupção serial
+
+  0079                 3     STATE           EQU             2FH.1                                   ;local de variável 
+                             de teste
+
+                       4             
+
+0000                   5                             ORG             RESET                                   ;endereço d
+                             o começo do programa
+
+0000 8026              6                             JMP             INICIO                                  ;vai para o
+                              início do código
+
+                       7                             
+
+0023                   8                             ORG             LTSERIAL                                ;endereço d
+                             o tratador de interrupção serial
+
+0023 C298              9                             CLR             RI                                              ;li
+                             mpa a flag que chamou o tratador
+
+0025 D279             10                             SETB    STATE                                   ;seta a variável de
+                              teste para sair do loop (linha 25)
+
+0027 32               11                             RETI                                                    ;volta ao p
+                             rograma
+
+                      12                             
+
+0028 75A890           13     INICIO:         MOV             IE,#10010000B                   ;habilita interrupção seria
+                             l
+
+002B 759850           14                             MOV             SCON,#01010000B                 ;serial no modo 1 e
+                              REN=#1 para poder receber dados
+
+002E 758920           15                             MOV             TMOD,#20H                               ;timer 1 no
+                              modo 2
+
+0031 758DE8           16                             MOV             TH1,#0E8H                               ;seta th1 p
+                             ara obter a baud rate de 1.2k
+
+0034 758BE8           17                             MOV             TL1,#0E8H                               ;seta tl1 p
+                             ara obter a baud rate de 1.2k
+
+0037 758700           18                             MOV             PCON,#00H                               ;SMOD=#0H
+
+                      19                             
+
+003A C279             20                             CLR             STATE                                   ;limpa a va
+                             riável de teste
+
+003C 75A020           21                             MOV             P2,#20H                                 ;MSB dos en
+                             dereços de memória externa a serem usados
+
+003F 7800             22                             MOV             R0,#00H                                 ;R0 será us
+                             ado para indexar os LSB dos endereços de memória externa
+
+0041 D28E             23                             SETB    TR1                                             ;começa a c
+                             ontagem no timer1
+
+                      24                             
+
+0043 3079FD           25     VOLTA:          JNB             STATE,VOLTA                             ;fica em loop até a
+                              interrupção serial ser chamada
+
+0046 C279             26                             CLR             STATE                                   ;limpa a va
+                             riável de teste
+
+0048 E599             27                             MOV             A,SBUF                                  ;joga no ac
+                             umulador o valor transmitido pela interface serial
+
+004A F2               28                             MOVX    @R0,A                                   ;move para o endere
+                             ço de memória externa desejado
+
+004B 08               29                             INC             R0                                              ;in
+                             crementa R0 para mudar o próximo endereço de memória externa
+
+004C B81FF4           30                             CJNE    R0,#1FH,VOLTA                   ;verifica se não foi atingi
+                             do o fim desejado da memória externa
+
+004F 7800             31                             MOV             R0,#00H                                 ;em caso af
+                             irmativo, reseta R0 para voltar ao x:2000H
+
+0051 80F0             32                             JMP             VOLTA                                   ;e volta ao
+A51 MACRO ASSEMBLER  OBPEX1                                                               06/24/2017 12:02:32 PAGE     2
+
+                              ciclo
+
+                      33                             
+
+                      34                             END                                                             ;ac
+                             aba o programa
+
+A51 MACRO ASSEMBLER  OBPEX1                                                               06/24/2017 12:02:32 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+IE . . . . . . . .  D ADDR   00A8H   A   
+INICIO . . . . . .  C ADDR   0028H   A   
+LTSERIAL . . . . .  N NUMB   0023H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+RESET. . . . . . .  N NUMB   0000H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+STATE. . . . . . .  B ADDR   002FH.1 A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+VOLTA. . . . . . .  C ADDR   0043H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

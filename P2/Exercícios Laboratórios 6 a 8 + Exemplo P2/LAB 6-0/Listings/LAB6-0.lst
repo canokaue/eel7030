@@ -1,0 +1,156 @@
+A51 MACRO ASSEMBLER  LAB6_0                                                               06/24/2017 08:53:32 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\LAB6-0.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LAB6-0.asm SET(SMALL) DEBUG PRINT(.\Listings\LAB6-0.lst) OBJECT(.\Objec
+                      ts\LAB6-0.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0000                 1     reset           equ   0h                                                                ;en
+                             dereço do início do programa
+
+  000B                 2     ltmr0           equ   0bh                                                               ;lo
+                             cal do tratador
+
+  0020                 3     state       equ   20h                                                           ;endereço d
+                             e variável de teste
+
+                       4     
+
+0000                   5                         org   reset                                                         ;PC
+                             =0 depois de reset
+
+0000 8013              6                             jmp   inicio                                                    ;va
+                             i para o início do programa
+
+                       7                             
+
+000B                   8                             org   ltmr0                                                        
+                                  ;faz a leitura do endereço do tratador do tmr0
+
+000B 758CFF            9                             mov   th0,  #0ffh                                               ;re
+                             carrega th0 com seu valor desejado #0ffh
+
+000E 758A9C           10                             mov   tl0,  #09ch                                               ;re
+                             carrega tl0 com seu valor desejado #9ch
+
+0011 752001           11                             mov   state,#1h                                                 ;se
+                             ta a variável de teste para sair do ciclo
+
+0014 32               12                             reti
+
+                      13     
+
+0015 75A882           14     inicio:         mov             ie,#10000010b                                   ;habilita t
+                             mr0 
+
+0018 758901           15                             mov     tmod,#01h                               ;define modo 1 para
+                              tmr0
+
+001B 758CFF           16                             mov     th0,#0ffh                                               ;se
+                             ta th0 no começo do programa
+
+001E 758A9C           17                             mov     tl0,#09ch                                               ;se
+                             ta tl0 para fazer a primeira contagem
+
+                      18                             
+
+                      19                             ;MODO 1: os valores de th0 e tl0 são definidos da seguinte forma: d
+                             eseja-se que a interrupção do timer seja solicitada
+
+                      20                             ;em intervalos de 100 ciclos de instrução. Subtraímos 100 de 2^16, 
+                             e analisamos o resultado dessa conta em hex
+
+                      21                             ;(2^16)-100 = #65436b = #FF9Ch, os dois MSB são alocados em th0 e o
+                             s LSB são alocados em tl0
+
+                      22                             
+
+0021 752000           23                             mov     state,#0h                                               ;de
+                             fine variável de teste com sendo 0
+
+0024 7820             24                             mov     r0,#state                                               ;sa
+                             lva o endereço da variável em r0
+
+0026 90003F           25                             mov     dptr,#tabela                                    ;salva no d
+                             ptr o endereço das infos da tabela
+
+0029 7900             26                             mov     r1,#0                                                   ;r1
+                              será usado como teste para saber se já foram os 16 caracteres
+
+002B D28C             27                             setb    tr0                                                        
+                                  ;inicia a contagem
+
+                      28                                     
+
+002D B601FD           29     volta:          cjne    @r0,#1,volta                                    ;fica preso até aca
+                             bar a contagem e chamar a interrupção
+
+                      30     
+
+0030 752000           31                             mov     state,#0h                                               ;re
+                             cupera valor de state
+
+0033 E9               32                             mov     a,r1                                                    ;de
+                             fine qual o caracter a ser jogado em p1
+
+0034 93               33                             movc    a,@a+dptr                                               ;sa
+A51 MACRO ASSEMBLER  LAB6_0                                                               06/24/2017 08:53:32 PAGE     2
+
+                             lva em A o valor do caracter da vez
+
+0035 F590             34                             mov     p1,a                                                    ;jo
+                             ga em p1
+
+0037 09               35                             inc     r1                                                         
+                                  ;incrementa r1 para que da próxima busque-se o caractere seguinte
+
+0038 B910F2           36                             cjne    r1,#16,volta                                    ;testa se j
+                             á não foram os 16 caracteres
+
+003B C28C             37                             clr     tr0                                                        
+                                  ;se já tiver terminado ele para de contar
+
+003D 80FE             38                             jmp     $                                                          
+                                  ; e fica aqui de buenas
+
+                      39                             
+
+003F 4D696372         40     tabela:         db 'Microcontrolador'                                   ;caracteres a serem
+                              jogados em p1
+
+0043 6F636F6E                
+0047 74726F6C                
+004B 61646F72                
+                      41     
+
+                      42                             end 
+
+A51 MACRO ASSEMBLER  LAB6_0                                                               06/24/2017 08:53:32 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+IE . . . . . . . .  D ADDR   00A8H   A   
+INICIO . . . . . .  C ADDR   0015H   A   
+LTMR0. . . . . . .  N NUMB   000BH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+RESET. . . . . . .  N NUMB   0000H   A   
+STATE. . . . . . .  N NUMB   0020H   A   
+TABELA . . . . . .  C ADDR   003FH   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+VOLTA. . . . . . .  C ADDR   002DH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

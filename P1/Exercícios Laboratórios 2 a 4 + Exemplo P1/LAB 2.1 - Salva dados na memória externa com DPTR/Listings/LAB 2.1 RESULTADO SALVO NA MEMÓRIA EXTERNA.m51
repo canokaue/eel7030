@@ -1,0 +1,66 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        04/03/2017  15:39:00  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\LAB 2.1 RESULTADO SALVO NA MEMÓRIA EXTERNA.obj TO .\Objects\LAB 2.1 RESULTADO SALV
+>> O NA MEMÓRIA EXTERNA PRINT (.\Listings\LAB 2.1 RESULTADO SALVO NA MEMÓRIA EXTERNA.m51)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\LAB 2.1 RESULTADO SALVO NA MEMÓRIA EXTERNA.obj (LAB_2_1_RESULTADO_SALVO_NA_MEM_RIA_EXTERN)
+
+
+LINK MAP OF MODULE:  .\Objects\LAB 2.1 RESULTADO SALVO NA MEMÓRIA EXTERNA (LAB_2_1_RESULTADO_SALVO_NA_MEM_RIA_EXTERN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0067H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\LAB 2.1 RESULTADO SALVO NA MEMÓRIA EXTERNA (LAB_2_1_RESULTADO_SALVO_NA_MEM_RIA_EXTERN
+>> )
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        LAB_2_1_RESULTADO_SALVO_NA_MEM_RIA_EXTERN
+  C:0061H         SYMBOL        DADOS
+  C:0019H         SYMBOL        FIM
+  C:0060H         SYMBOL        NRO
+  N:0000H         SYMBOL        RESET
+  N:0060H         SYMBOL        VETOR
+  C:000EH         SYMBOL        VOLTA
+  C:0000H         LINE#         5
+  C:0003H         LINE#         6
+  C:0005H         LINE#         7
+  C:0006H         LINE#         8
+  C:0007H         LINE#         9
+  C:000AH         LINE#         10
+  C:000CH         LINE#         11
+  C:000EH         LINE#         12
+  C:000FH         LINE#         13
+  C:0010H         LINE#         14
+  C:0011H         LINE#         15
+  C:0012H         LINE#         16
+  C:0013H         LINE#         17
+  C:0015H         LINE#         20
+  C:0018H         LINE#         21
+  C:0019H         LINE#         24
+  -------         ENDMOD        LAB_2_1_RESULTADO_SALVO_NA_MEM_RIA_EXTERN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0022H BYTE ( 1%) *
+******************************************************************************
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/03/2017  15:39:00  PAGE 2
+
+
+Program Size: data=8.0 xdata=0 code=103
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

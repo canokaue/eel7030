@@ -1,0 +1,104 @@
+A51 MACRO ASSEMBLER  LAB_3_4_                                                             04/11/2017 11:10:26 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\LAB 3.4_.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LAB 3.4_.asm SET(SMALL) DEBUG PRINT(.\Listings\LAB 3.4_.lst) OBJECT(.\O
+                      bjects\LAB 3.4_.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;Programa MOSTRA1.asm
+
+  0087                 2     CS EQU P0.7
+
+  00B3                 3     END0 EQU P3.3;
+
+  00B4                 4     END1 EQU P3.4;
+
+  00FE                 5     ATRASO EQU 0FEH
+
+  0021                 6     CHUCHU EQU 21H ; PARA USAR UMA POSIÇÃO DE MEMÓRIA TEMOS QUE NOMEAR ELA ANTES DE USAR
+
+                       7     
+
+0000                   8                                     ORG 0H
+
+0000 C2B3              9                                     CLR END0
+
+0002 C2B4             10                                     CLR END1
+
+0004 D287             11                                     SETB CS
+
+                      12             
+
+0006                  13     VOLTA:          
+
+0006 7B0A             14                                     MOV R3,#0AH
+
+                      15     
+
+0008 EB               16     CONTA:                  MOV A,R3
+
+0009 1118             17                                     CALL CONVERTE
+
+000B F590             18                                     MOV P1,A
+
+000D 7521FE           19                                     MOV CHUCHU,#ATRASO
+
+0010 DBF6             20                                     DJNZ R3,CONTA
+
+                      21                                     
+
+0012 80F2             22                                     JMP VOLTA
+
+                      23                                     
+
+0014 D521FD           24     DELAY:                  DJNZ CHUCHU,DELAY
+
+                      25     
+
+0017 22               26                                     RET
+
+                      27                                     
+
+0018                  28     CONVERTE:
+
+0018 83               29                                     MOVC A,@A+PC
+
+0019 22               30                                     RET                             
+
+001A 40792430         31     TABELA: DB 40H, 79H, 24H, 30H, 19H, 12H, 02H, 78H, 00H, 10H, 08H, 03H, 46H,21H, 06H, 0EH
+
+001E 19120278                
+0022 00100803                
+0026 4621060E                
+                      32     END
+
+A51 MACRO ASSEMBLER  LAB_3_4_                                                             04/11/2017 11:10:26 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ATRASO . . . . . .  N NUMB   00FEH   A   
+CHUCHU . . . . . .  N NUMB   0021H   A   
+CONTA. . . . . . .  C ADDR   0008H   A   
+CONVERTE . . . . .  C ADDR   0018H   A   
+CS . . . . . . . .  B ADDR   0080H.7 A   
+DELAY. . . . . . .  C ADDR   0014H   A   
+END0 . . . . . . .  B ADDR   00B0H.3 A   
+END1 . . . . . . .  B ADDR   00B0H.4 A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+TABELA . . . . . .  C ADDR   001AH   A   
+VOLTA. . . . . . .  C ADDR   0006H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,24 @@
+--cpu Cortex-M4.fp
+"aula3armtimerinterruption\startup_stm32f429xx.o"
+"aula3armtimerinterruption\stm32f4xx_it.o"
+"aula3armtimerinterruption\stm32f4xx_hal_msp.o"
+"aula3armtimerinterruption\main.o"
+"aula3armtimerinterruption\stm32f4xx_hal_pwr_ex.o"
+"aula3armtimerinterruption\stm32f4xx_hal_tim.o"
+"aula3armtimerinterruption\stm32f4xx_hal_rcc.o"
+"aula3armtimerinterruption\stm32f4xx_hal_rcc_ex.o"
+"aula3armtimerinterruption\stm32f4xx_hal_flash_ex.o"
+"aula3armtimerinterruption\stm32f4xx_hal_dma.o"
+"aula3armtimerinterruption\stm32f4xx_hal_flash.o"
+"aula3armtimerinterruption\stm32f4xx_hal_pwr.o"
+"aula3armtimerinterruption\stm32f4xx_hal_flash_ramfunc.o"
+"aula3armtimerinterruption\stm32f4xx_hal_gpio.o"
+"aula3armtimerinterruption\stm32f4xx_hal.o"
+"aula3armtimerinterruption\stm32f4xx_hal_cortex.o"
+"aula3armtimerinterruption\stm32f4xx_hal_tim_ex.o"
+"aula3armtimerinterruption\stm32f4xx_hal_dma_ex.o"
+"aula3armtimerinterruption\system_stm32f4xx.o"
+--library_type=microlib --strict --scatter "aula3ARMtimerInterruption\aula3ARMtimerInterruption.sct"
+--diag_suppress=L6329 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "aula3ARMtimerInterruption.map" -o aula3ARMtimerInterruption\aula3ARMtimerInterruption.axf

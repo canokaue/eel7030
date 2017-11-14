@@ -1,0 +1,163 @@
+A51 MACRO ASSEMBLER  OBPEX3                                                               06/25/2017 10:38:22 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\OBPex3.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE OBPex3.asm SET(SMALL) DEBUG PRINT(.\Listings\OBPex3.lst) OBJECT(.\Objec
+                      ts\OBPex3.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0000                 1     RESET           EQU             00H                                     ;endereço da memóri
+                             a de programa a ser usada pelo código
+
+  0023                 2     LTSERIAL        EQU             23H                                     ;endereço do tratad
+                             or de interrupção serial
+
+  0078                 3     STATE           EQU             2FH.0                           ;endereço de variável de te
+                             ste
+
+                       4             
+
+0000                   5                             ORG             RESET                           ;começa a leitura d
+                             o código do programa
+
+0000 8026              6                             JMP     INICIO                          ;pula para as instruções
+
+                       7                             
+
+0023                   8                             ORG             LTSERIAL                        ;começa a leitura d
+                             o tratador de interrupção
+
+0023 C299              9                             CLR             TI                                      ;limpa TI p
+                             ara não chamar a inetrrupção novamente
+
+0025 D278             10                             SETB    STATE                           ;seta a variável de teste p
+                             ara sair do loop
+
+0027 32               11                             RETI                                            ;retorna ao program
+                             a
+
+                      12                             
+
+0028 75A890           13     INICIO:         MOV             IE,#10010000B           ;habilita interrupção serial
+
+002B 758700           14                             MOV             PCON,#00H                       ;smod = #0 para tax
+                             a de 4.8k
+
+002E 759840           15                             MOV             SCON,#01000000B         ;interrupção serial no modo
+                              1
+
+0031 758920           16                             MOV             TMOD,#20H                       ;timer 1 no modo 2
+
+0034 758DFA           17                             MOV             TH1,#0FAH                       ;valor de recarga e
+                             specificado para taxa de 4.8k
+
+0037 758BFA           18                             MOV             TL1,#0FAH                       ;valor inicial de c
+                             ontagem para taxa de 4.8k
+
+                      19                             
+
+003A 75A020           20                             MOV             P2,#20H                         ;MSB do endereço de
+                              memória externa
+
+003D 7800             21                             MOV             R0,#00H                         ;LSB do endereço de
+                              memória externa
+
+003F 7901             22                             MOV             R1,#01H                         ;r1 vai indicar qua
+                             l o caracter que deve ser enviado
+
+0041 7A00             23                             MOV             R2,#00H                         ;r2 vai realizar a 
+                             contagem de caracteres enviados
+
+0043 90005F           24                             MOV             DPTR,#TABELA            ;dptr salva o endereço dos 
+                             caracteres
+
+0046 D28E             25                             SETB    TR1                                     ;começa a contagem
+
+0048 759945           26                             MOV             SBUF,#'E'                       ;envia para sbuf o 
+                             primeiro caracter
+
+                      27                             
+
+004B 3078FD           28     VOLTA:          JNB             STATE,VOLTA                     ;fica em loop até a interru
+                             pção ser executada
+
+004E C278             29                             CLR     STATE                           ;limpa a variável de teste
+
+0050 E9               30                             MOV             A,R1                            ;r1 define que qual
+                              caractere será enviado 
+
+0051 93               31                             MOVC    A,@A+DPTR                       ;a+dptr busca o caracter na
+                              memória
+
+0052 F599             32                             MOV             SBUF,A                          ;e o caractere é en
+                             viado para sbuf, que enviará pra interface serial
+
+0054 0A               33                             INC             R2                                      ;r2 é incre
+                             mentado, pois um novo caractere foi enviado
+
+0055 EA               34                             MOV             A,R2                            ;move-se o novo val
+A51 MACRO ASSEMBLER  OBPEX3                                                               06/25/2017 10:38:22 PAGE     2
+
+                             or de r2 para a
+
+0056 F2               35                             MOVX    @R0,A                           ;e salva-se ele no endereço
+                              de memória externa especifica
+
+0057 09               36                             INC             R1                                      ;r1 é incre
+                             mentado para buscar o caracter seguinte após a próxima interrupção
+
+0058 B91AF0           37                             CJNE    R1,#1AH,VOLTA           ;verifica-se se já não foram todos 
+                             os caracteres
+
+005B 7900             38                             MOV             R1,#00H                         ;em caso afirmativo
+                             , reseta-se o r1
+
+005D 80EC             39                             JMP             VOLTA                           ;e volta-se para o 
+                             loop
+
+                      40                             
+
+005F 45454C37         41     TABELA:         DB              'EEL7030-Microprocessadores'
+
+0063 3033302D                
+0067 4D696372                
+006B 6F70726F                
+006F 63657373                
+0073 61646F72                
+0077 6573                    
+                      42             
+
+                      43                             END
+
+A51 MACRO ASSEMBLER  OBPEX3                                                               06/25/2017 10:38:22 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+IE . . . . . . . .  D ADDR   00A8H   A   
+INICIO . . . . . .  C ADDR   0028H   A   
+LTSERIAL . . . . .  N NUMB   0023H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+RESET. . . . . . .  N NUMB   0000H   A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+STATE. . . . . . .  B ADDR   002FH.0 A   
+TABELA . . . . . .  C ADDR   005FH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+VOLTA. . . . . . .  C ADDR   004BH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

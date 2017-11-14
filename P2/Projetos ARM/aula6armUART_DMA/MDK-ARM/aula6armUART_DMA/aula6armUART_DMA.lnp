@@ -1,0 +1,25 @@
+--cpu Cortex-M4.fp
+"aula6armuart_dma\stm32f4xx_hal_dma_ex.o"
+"aula6armuart_dma\stm32f4xx_hal_cortex.o"
+"aula6armuart_dma\stm32f4xx_hal_gpio.o"
+"aula6armuart_dma\stm32f4xx_hal.o"
+"aula6armuart_dma\stm32f4xx_hal_rcc.o"
+"aula6armuart_dma\stm32f4xx_hal_dma.o"
+"aula6armuart_dma\stm32f4xx_hal_flash_ex.o"
+"aula6armuart_dma\stm32f4xx_hal_pwr.o"
+"aula6armuart_dma\stm32f4xx_hal_flash.o"
+"aula6armuart_dma\stm32f4xx_hal_tim_ex.o"
+"aula6armuart_dma\stm32f4xx_hal_rcc_ex.o"
+"aula6armuart_dma\stm32f4xx_hal_pwr_ex.o"
+"aula6armuart_dma\stm32f4xx_hal_uart.o"
+"aula6armuart_dma\stm32f4xx_hal_tim.o"
+"aula6armuart_dma\stm32f4xx_hal_flash_ramfunc.o"
+"aula6armuart_dma\stm32f4xx_it.o"
+"aula6armuart_dma\stm32f4xx_hal_msp.o"
+"aula6armuart_dma\main.o"
+"aula6armuart_dma\system_stm32f4xx.o"
+"aula6armuart_dma\startup_stm32f429xx.o"
+--library_type=microlib --strict --scatter "aula6armUART_DMA\aula6armUART_DMA.sct"
+--diag_suppress=L6329 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "aula6armUART_DMA.map" -o aula6armUART_DMA\aula6armUART_DMA.axf

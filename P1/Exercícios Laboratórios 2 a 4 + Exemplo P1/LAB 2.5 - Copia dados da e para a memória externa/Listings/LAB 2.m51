@@ -1,0 +1,60 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        04/07/2017  14:38:47  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\LAB 2.5_COPIAR_DADOS_MEMORIA_EXTERNA_COLA_NA_INTERNA.obj TO .\Objects\LAB 2.5_COPI
+>> AR_DADOS_MEMORIA_EXTERNA_COLA_NA_INTERNA PRINT (.\Listings\LAB 2.m51)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\LAB 2.5_COPIAR_DADOS_MEMORIA_EXTERNA_COLA_NA_INTERNA.obj (LAB_2_5_COPIAR_DADOS_MEMORIA_EXTERNA_COLA)
+
+
+LINK MAP OF MODULE:  .\Objects\LAB 2.5_COPIAR_DADOS_MEMORIA_EXTERNA_COLA_NA_INTERNA (LAB_2_5_COPIAR_DADOS_MEMORIA_EXTERN
+>> A_COLA)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     001AH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\LAB 2.5_COPIAR_DADOS_MEMORIA_EXTERNA_COLA_NA_INTERNA (LAB_2_5_COPIAR_DADOS_MEMORIA_EX
+>> TERNA_COLA)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        LAB_2_5_COPIAR_DADOS_MEMORIA_EXTERNA_COLA
+  C:0000H         SYMBOL        INICIO
+  D:00A0H         SYMBOL        P2
+  N:0000H         SYMBOL        RESET
+  C:0008H         SYMBOL        VOLTA
+  C:0000H         LINE#         4
+  C:0002H         LINE#         5
+  C:0004H         LINE#         8
+  C:0006H         LINE#         9
+  C:0008H         LINE#         12
+  C:000BH         LINE#         13
+  C:000CH         LINE#         15
+  C:000EH         LINE#         16
+  C:0011H         LINE#         18
+  C:0012H         LINE#         20
+  C:0013H         LINE#         21
+  C:0014H         LINE#         22
+  C:0016H         LINE#         23
+  C:0018H         LINE#         24
+  -------         ENDMOD        LAB_2_5_COPIAR_DADOS_MEMORIA_EXTERNA_COLA
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 001AH BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=26
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

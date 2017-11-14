@@ -1,0 +1,3 @@
+".\Objects\OBPex1.obj" 
+TO ".\Objects\OBPex1" 
+PRINT(".\Listings\OBPex1.m51")

@@ -1,0 +1,24 @@
+--cpu Cortex-M4.fp
+"aula1arm\startup_stm32f429xx.o"
+"aula1arm\main.o"
+"aula1arm\stm32f4xx_hal_msp.o"
+"aula1arm\stm32f4xx_it.o"
+"aula1arm\stm32f4xx_hal_flash_ex.o"
+"aula1arm\stm32f4xx_hal.o"
+"aula1arm\stm32f4xx_hal_pwr_ex.o"
+"aula1arm\stm32f4xx_hal_pwr.o"
+"aula1arm\stm32f4xx_hal_flash_ramfunc.o"
+"aula1arm\stm32f4xx_hal_gpio.o"
+"aula1arm\stm32f4xx_hal_flash.o"
+"aula1arm\stm32f4xx_hal_dma.o"
+"aula1arm\stm32f4xx_hal_cortex.o"
+"aula1arm\stm32f4xx_hal_tim_ex.o"
+"aula1arm\stm32f4xx_hal_dma_ex.o"
+"aula1arm\stm32f4xx_hal_tim.o"
+"aula1arm\stm32f4xx_hal_rcc.o"
+"aula1arm\stm32f4xx_hal_rcc_ex.o"
+"aula1arm\system_stm32f4xx.o"
+--library_type=microlib --strict --scatter "aula1arm\aula1arm.sct"
+--diag_suppress=L6329 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "aula1arm.map" -o aula1arm\aula1arm.axf

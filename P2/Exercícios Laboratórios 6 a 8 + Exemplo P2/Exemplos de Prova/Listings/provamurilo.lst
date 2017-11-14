@@ -1,0 +1,143 @@
+A51 MACRO ASSEMBLER  PROVAMURILO                                                          06/25/2017 20:44:17 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\provamurilo.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE provamurilo.asm SET(SMALL) DEBUG PRINT(.\Listings\provamurilo.lst) OBJE
+                      CT(.\Objects\provamurilo.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0000                 1     RESET           EQU             00H
+
+  0023                 2     LTSERIAL        EQU             23H
+
+  0079                 3     STATE           EQU             2FH.1
+
+  007A                 4     TESTE           EQU             2FH.2
+
+                       5             
+
+0000                   6                             ORG             RESET
+
+0000 802D              7                             JMP             INICIO
+
+                       8                             
+
+0023                   9                             ORG             LTSERIAL
+
+0023 309804           10                             JNB             RI,TRANS
+
+0026 C298             11                             CLR             RI
+
+0028 8002             12                             JMP             RETIS                   
+
+002A C299             13     TRANS:          CLR             TI
+
+002C D279             14     RETIS:          SETB    STATE
+
+002E 32               15                             RETI
+
+                      16                             
+
+002F 75A890           17     INICIO:         MOV             IE,#10010000B
+
+0032 7598D0           18                             MOV             SCON,#11010000B
+
+0035 758920           19                             MOV             TMOD,#20H
+
+0038 758DF4           20                             MOV             TH1,#0F4H
+
+003B 758BF4           21                             MOV             TL1,#0F4H
+
+003E 758700           22                             MOV             PCON,#00H
+
+                      23                             
+
+0041 7A45             24                             MOV             R2,#45H
+
+0043 C279             25                             CLR             STATE
+
+0045 759945           26                             MOV             SBUF,#'E'
+
+0048 D28E             27                             SETB    TR1
+
+                      28                             
+
+004A 3079FD           29     VOLTA:          JNB             STATE,VOLTA
+
+004D C279             30                             CLR             STATE
+
+004F E599             31                             MOV             A,SBUF
+
+0051 A2D0             32                             MOV             C,P
+
+0053 30D009           33                             JNB             P,PZERO
+
+                      34     
+
+0056 829A             35     PNZERO:         ANL             C,RB8
+
+0058 927A             36                             MOV             TESTE,C
+
+005A 307A0B           37                             JNB             TESTE,ERRO
+
+005D 80EB             38                             JMP             VOLTA
+
+                      39                             
+
+005F 729A             40     PZERO:          ORL             C,RB8
+
+0061 927A             41                             MOV             TESTE,C
+
+0063 307AE4           42                             JNB             TESTE,VOLTA
+
+0066 8000             43                             JMP             ERRO
+
+                      44     
+
+0068 8A99             45     ERRO:           MOV             SBUF,R2
+
+006A 80DE             46                             JMP             VOLTA
+
+                      47     
+
+                      48                             END
+
+A51 MACRO ASSEMBLER  PROVAMURILO                                                          06/25/2017 20:44:17 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ERRO . . . . . . .  C ADDR   0068H   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+INICIO . . . . . .  C ADDR   002FH   A   
+LTSERIAL . . . . .  N NUMB   0023H   A   
+P. . . . . . . . .  B ADDR   00D0H.0 A   
+PCON . . . . . . .  D ADDR   0087H   A   
+PNZERO . . . . . .  C ADDR   0056H   A   
+PZERO. . . . . . .  C ADDR   005FH   A   
+RB8. . . . . . . .  B ADDR   0098H.2 A   
+RESET. . . . . . .  N NUMB   0000H   A   
+RETIS. . . . . . .  C ADDR   002CH   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+STATE. . . . . . .  B ADDR   002FH.1 A   
+TESTE. . . . . . .  B ADDR   002FH.2 A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+TRANS. . . . . . .  C ADDR   002AH   A   
+VOLTA. . . . . . .  C ADDR   004AH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

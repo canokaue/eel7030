@@ -1,0 +1,85 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/25/2017  11:23:02  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\OBPex4.obj TO .\Objects\OBPex4 PRINT (.\Listings\OBPex4.m51)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\OBPex4.obj (OBPEX4)
+
+
+LINK MAP OF MODULE:  .\Objects\OBPex4 (OBPEX4)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0059H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\OBPex4 (OBPEX4)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        OBPEX4
+  C:0056H         SYMBOL        EXT
+  D:00A8H         SYMBOL        IE
+  C:0028H         SYMBOL        INICIO
+  C:004DH         SYMBOL        INT
+  N:0023H         SYMBOL        LTSERIAL
+  D:00A0H         SYMBOL        P2
+  D:0087H         SYMBOL        PCON
+  B:0098H.2       SYMBOL        RB8
+  N:0000H         SYMBOL        RESET
+  B:0098H.0       SYMBOL        RI
+  D:0099H         SYMBOL        SBUF
+  D:0098H         SYMBOL        SCON
+  B:002FH.0       SYMBOL        STATE
+  D:008DH         SYMBOL        TH1
+  D:008BH         SYMBOL        TL1
+  D:0089H         SYMBOL        TMOD
+  B:0088H.6       SYMBOL        TR1
+  C:0043H         SYMBOL        VOLTA
+  C:0000H         LINE#         6
+  C:0023H         LINE#         9
+  C:0025H         LINE#         10
+  C:0027H         LINE#         11
+  C:0028H         LINE#         13
+  C:002BH         LINE#         14
+  C:002EH         LINE#         15
+  C:0031H         LINE#         16
+  C:0034H         LINE#         17
+  C:0037H         LINE#         18
+  C:003AH         LINE#         20
+  C:003DH         LINE#         21
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/25/2017  11:23:02  PAGE 2
+
+
+  C:003FH         LINE#         22
+  C:0041H         LINE#         23
+  C:0043H         LINE#         25
+  C:0046H         LINE#         26
+  C:0048H         LINE#         27
+  C:004AH         LINE#         28
+  C:004DH         LINE#         30
+  C:004EH         LINE#         31
+  C:004FH         LINE#         32
+  C:0052H         LINE#         33
+  C:0054H         LINE#         34
+  C:0056H         LINE#         36
+  C:0057H         LINE#         37
+  -------         ENDMOD        OBPEX4
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0038H BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=89
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

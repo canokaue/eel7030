@@ -1,0 +1,124 @@
+A51 MACRO ASSEMBLER  LAB7_1                                                               06/24/2017 10:44:44 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\LAB7-1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LAB7-1.asm SET(SMALL) DEBUG PRINT(.\Listings\LAB7-1.lst) OBJECT(.\Objec
+                      ts\LAB7-1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0000                 1     RESET           EQU     00H                                     ;começo do programa
+
+  0023                 2     LTSERIAL        EQU     23H                             ;local tratador de serial
+
+  0020                 3     STATE           EQU     20H                                     ;endereço da variável de te
+                             ste
+
+                       4     
+
+0000                   5                             ORG     RESET                           ;PC=0 depois de reset
+
+0000 8027              6                             JMP     INICIO                          ;pula para início do progra
+                             ma
+
+                       7     
+
+0023                   8                             ORG     LTSERIAL                        ;vai para endereço do trata
+                             dor de serial
+
+0023 C298              9                             CLR     RI                                      ;limpa RI (flag que
+                              solicita a execução do tratador)
+
+0025 752001           10                             MOV     STATE,#1H                       ;seta a variável de teste
+
+0028 32               11                             RETI                                            ;volta ao programa
+
+                      12     
+
+0029 75A890           13     INICIO:         MOV     IE,#10010000B           ;habilita interrupção serial
+
+002C 759850           14                             MOV     SCON,#01010000B         ;serial no modo 1 de funcionamento,
+                              REN=#1 ==> programa pode receber dados
+
+002F 758920           15                             MOV     TMOD,#00100000B         ;modo 2 para o timer1
+
+0032 758DFD           16                             MOV     TH1,#0FDH                       ;deseja-se uma baud rate de
+                              9.6k no modo 1, logo th1 =#0fdh (tabela12 - pg.51)
+
+0035 758BFD           17                             MOV     TL1,#0FDH                       ;deseja-se uma baud rate de
+                              9.6k no modo 1, logo tl1 =#0fdh (tabela12 - pg.51)
+
+0038 758700           18                             MOV     PCON,#0H                        ;nesse modo para obter 9.6k
+                             , SMOD (FF de PCON) deve ser igual a 0
+
+003B D28E             19                             SETB    TR1                                     ;começa a contar
+
+                      20                             
+
+003D 752000           21     INICIO2:        MOV     STATE,#0H                       ;zera a variável de teste
+
+0040 7820             22                             MOV     R0,#STATE                       ;salva o endereço da variáv
+                             el de teste
+
+0042 7930             23                             MOV             R1,#30H                         ;salva o endereço o
+                             nde deseja-se salvar os dados
+
+                      24     
+
+0044 B601FD           25     VOLTA:          CJNE    @R0,#1,VOLTA            ;fica em um ciclo até chamar a interrupção 
+                             serial
+
+0047 752000           26                             MOV     STATE,#0H                       ;zera a variável
+
+004A E599             27                             MOV     A,SBUF                          ;manda para A o que tiver e
+                             m SBUF
+
+004C F7               28                             MOV             @R1,A                           ;manda o valor rece
+                             bido para o endereço apontado por r1
+
+004D 09               29                             INC             R1                                      ;aumenta r1
+                              para salvar o próximo dado no endereço seguinte
+
+004E B935F3           30                             CJNE    R1,#35H,VOLTA           ;testa se já não foram ocupados os 
+                             5 endereços de memória
+
+0051 7930             31                             MOV             R1,#30H                         ;reseta o valor de 
+                             r1, para volta ao ciclo
+
+0053 80EF             32                             JMP     VOLTA                           ;volta para salvar os novos
+                              dados no primeiro endereço indicado
+
+                      33     
+
+                      34                             END
+
+A51 MACRO ASSEMBLER  LAB7_1                                                               06/24/2017 10:44:44 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+IE . . . . . . . .  D ADDR   00A8H   A   
+INICIO . . . . . .  C ADDR   0029H   A   
+INICIO2. . . . . .  C ADDR   003DH   A   
+LTSERIAL . . . . .  N NUMB   0023H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+RESET. . . . . . .  N NUMB   0000H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+STATE. . . . . . .  N NUMB   0020H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+VOLTA. . . . . . .  C ADDR   0044H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

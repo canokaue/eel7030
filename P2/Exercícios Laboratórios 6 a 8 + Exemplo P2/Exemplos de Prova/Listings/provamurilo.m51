@@ -1,0 +1,97 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/25/2017  20:44:17  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\provamurilo.obj TO .\Objects\provamurilo PRINT (.\Listings\provamurilo.m51)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\provamurilo.obj (PROVAMURILO)
+
+
+LINK MAP OF MODULE:  .\Objects\provamurilo (PROVAMURILO)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     006CH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\provamurilo (PROVAMURILO)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        PROVAMURILO
+  C:0068H         SYMBOL        ERRO
+  D:00A8H         SYMBOL        IE
+  C:002FH         SYMBOL        INICIO
+  N:0023H         SYMBOL        LTSERIAL
+  B:00D0H.0       SYMBOL        P
+  D:0087H         SYMBOL        PCON
+  C:0056H         SYMBOL        PNZERO
+  C:005FH         SYMBOL        PZERO
+  B:0098H.2       SYMBOL        RB8
+  N:0000H         SYMBOL        RESET
+  C:002CH         SYMBOL        RETIS
+  B:0098H.0       SYMBOL        RI
+  D:0099H         SYMBOL        SBUF
+  D:0098H         SYMBOL        SCON
+  B:002FH.1       SYMBOL        STATE
+  B:002FH.2       SYMBOL        TESTE
+  D:008DH         SYMBOL        TH1
+  B:0098H.1       SYMBOL        TI
+  D:008BH         SYMBOL        TL1
+  D:0089H         SYMBOL        TMOD
+  B:0088H.6       SYMBOL        TR1
+  C:002AH         SYMBOL        TRANS
+  C:004AH         SYMBOL        VOLTA
+  C:0000H         LINE#         7
+  C:0023H         LINE#         10
+  C:0026H         LINE#         11
+  C:0028H         LINE#         12
+  C:002AH         LINE#         13
+  C:002CH         LINE#         14
+  C:002EH         LINE#         15
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/25/2017  20:44:17  PAGE 2
+
+
+  C:002FH         LINE#         17
+  C:0032H         LINE#         18
+  C:0035H         LINE#         19
+  C:0038H         LINE#         20
+  C:003BH         LINE#         21
+  C:003EH         LINE#         22
+  C:0041H         LINE#         24
+  C:0043H         LINE#         25
+  C:0045H         LINE#         26
+  C:0048H         LINE#         27
+  C:004AH         LINE#         29
+  C:004DH         LINE#         30
+  C:004FH         LINE#         31
+  C:0051H         LINE#         32
+  C:0053H         LINE#         33
+  C:0056H         LINE#         35
+  C:0058H         LINE#         36
+  C:005AH         LINE#         37
+  C:005DH         LINE#         38
+  C:005FH         LINE#         40
+  C:0061H         LINE#         41
+  C:0063H         LINE#         42
+  C:0066H         LINE#         43
+  C:0068H         LINE#         45
+  C:006AH         LINE#         46
+  -------         ENDMOD        PROVAMURILO
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 004BH BYTE ( 3%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=108
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

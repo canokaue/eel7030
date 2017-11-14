@@ -1,0 +1,269 @@
+A51 MACRO ASSEMBLER  LAB7_4                                                               06/24/2017 11:28:17 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\LAB7-4.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LAB7-4.asm SET(SMALL) DEBUG PRINT(.\Listings\LAB7-4.lst) OBJECT(.\Objec
+                      ts\LAB7-4.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0000                 1     RESET           EQU             00H                                     ;endereço do ínicio
+                              do programa
+
+  0023                 2     LTSERIAL        EQU             23H                                     ;endereço do tratad
+                             or de interrupção serial
+
+  0079                 3     STATE1          EQU             2FH.1                           ;endereço de variável de te
+                             ste para enviar dados 
+
+  007A                 4     STATE2          EQU             2FH.2                           ;endereço da variável de te
+                             ste para receber dados
+
+                       5     
+
+0000                   6                             ORG             RESET                           ;início do programa
+
+0000 802F              7                             JMP             INICIO                          ;pula para o início
+
+                       8                             
+
+0023                   9                             ORG             LTSERIAL                        ;início do tratador
+                              de interrupção
+
+0023 309806           10                             JNB             RI,RECEBE                       ;caso RI=0, signifi
+                             ca que é para um dado ser enviado, então desvia-se para setar STATE1
+
+0026 D27A             11                             SETB    STATE2                          ;caso RI=1, significa que u
+                             m dado foi recebido, então seta-se STATE2
+
+0028 C298             12                             CLR             RI                                      ;limpa-se R
+                             I para o programa não chamar a interrupção quando voltar
+
+002A 8004             13                             JMP             RETIS                           ;pula as instruções
+                              referentes ao envio de dados
+
+002C D279             14     RECEBE:         SETB    STATE1                          ;seta a variável de teste do envio 
+                             de dados
+
+002E C299             15                             CLR             TI                                      ;limpa-se T
+                             I para o programa não chamar a interrupção quando voltar
+
+0030 32               16     RETIS:          RETI                                            ;retorna ao programa
+
+                      17                             
+
+0031 754101           18     INICIO:         MOV             41H,#01H                        ;aqui são salvos vários dad
+                             os nos endereços de #41h até #61h para serem transferidos
+
+0034 754202           19                             MOV             42H,#02H                        ;através da interfa
+                             ce serial (proposta do exercício)
+
+0037 754303           20                             MOV             43H,#03H
+
+003A 754404           21                             MOV             44H,#04H
+
+003D 754502           22                             MOV             45H,#02H
+
+0040 754602           23                             MOV             46H,#02H
+
+0043 754702           24                             MOV             47H,#02H
+
+0046 754802           25                             MOV             48H,#02H
+
+0049 754902           26                             MOV             49H,#02H
+
+004C 754A02           27                             MOV             4AH,#02H
+
+004F 754B02           28                             MOV             4BH,#02H
+
+0052 754C02           29                             MOV             4CH,#02H
+
+0055 754D02           30                             MOV             4DH,#02H
+
+0058 754E02           31                             MOV             4EH,#02H
+
+005B 754F02           32                             MOV             4FH,#02H
+
+005E 755002           33                             MOV             50H,#02H
+
+0061 755101           34                             MOV             51H,#01H
+
+0064 755202           35                             MOV             52H,#02H
+
+0067 755303           36                             MOV             53H,#03H
+
+006A 755404           37                             MOV             54H,#04H
+
+006D 755502           38                             MOV             55H,#02H
+
+0070 755602           39                             MOV             56H,#02H
+
+0073 755702           40                             MOV             57H,#02H
+
+0076 755802           41                             MOV             58H,#02H
+
+0079 755902           42                             MOV             59H,#02H
+
+007C 755A02           43                             MOV             5AH,#02H
+
+007F 755B02           44                             MOV             5BH,#02H
+
+A51 MACRO ASSEMBLER  LAB7_4                                                               06/24/2017 11:28:17 PAGE     2
+
+0082 755C02           45                             MOV             5CH,#02H
+
+0085 755D02           46                             MOV             5DH,#02H
+
+0088 755E02           47                             MOV             5EH,#02H
+
+008B 755F02           48                             MOV             5FH,#02H
+
+008E 756002           49                             MOV             60H,#02H
+
+0091 756102           50                             MOV             61H,#02H
+
+                      51                             
+
+0094 75A890           52     INICIO2:        MOV             IE,#10010000B                   ;habilita a ocorrência de i
+                             nterrupção serial
+
+0097 759850           53                             MOV             SCON,#01010000B                 ;pela frequência de
+                             sejada, é preciso utilizar o serial no modo 1, REN=1
+
+009A 758920           54                             MOV             TMOD,#00100000B                 ;pela frequência de
+                             sejada, é preciso utilizar timer1 no modo 2
+
+009D 758DFD           55                             MOV             TH1,#0FDH                               ;valor tabe
+                             lado para obtermos 19.2kibi 
+
+00A0 758BFD           56                             MOV             TL1,#0FDH                               ;valor tabe
+                             lado para obtermos 19.2kibi
+
+00A3 758780           57                             MOV             PCON,#10000000B                 ;para 19.2 kibi, sm
+                             od=1
+
+                      58                             
+
+00A6 C279             59                             CLR             STATE1                                  ;zera a var
+                             iável de teste de envio de dados
+
+00A8 C27A             60                             CLR             STATE2                                  ;zera a var
+                             iável de teste para recebimento de dados
+
+00AA 75A000           61                             MOV             P2,#00H                                 ;MSB do end
+                             ereço de memória externa a ser usado
+
+00AD 7800             62                             MOV             R0,#00H                                 ;r0 vai apo
+                             ntar para o endereço solicitado pelo exercício
+
+00AF 7941             63                             MOV             R1,#41H                                 ;r1 aponta 
+                             para o endereço para pegar dados e enviar pro serial
+
+00B1 D28E             64                             SETB    TR1                                             ;começa a c
+                             ontar
+
+00B3 8799             65                             MOV             SBUF,@R1                                ;IMPORTANTE
+                             : para ocorrer a transmissão serial, o primeiro dado a ser transmitido
+
+                      66                                                                                             ;de
+                             ve ser enviado para SBUF antes de se entrar no ciclo, caso contrário as interrupções
+
+                      67                                                                                             ;se
+                             riais não serão atendidas
+
+                      68                             
+
+00B5 307902           69     VOLTA:          JNB             STATE1,VOLTA1                   ;aqui nesse trecho o progra
+                             ma fica alternando entre as linhas 69 e 71 para quebrar o ciclo                      
+
+00B8 8010             70                             JMP             ENVIADADOS                              ;na linha 6
+                             9 (caso seja momento de enviar dados) ou na linha 71 (caso seja momento de receber
+
+00BA 307AF8           71     VOLTA1:         JNB             STATE2,VOLTA                    ;os dados)
+
+                      72                             
+
+00BD C27A             73                             CLR             STATE2                                  ;limpa a va
+                             riável de teste de recebimento de dados
+
+00BF E599             74                             MOV             A,SBUF                                  ;envia o da
+                             do que foi recebido para A
+
+00C1 F2               75                             MOVX    @R0,A                                   ;envia o dado para 
+                             o endereço da memória interna da vez
+
+00C2 08               76                             INC             R0                                              ;in
+                             crementa r0 para enviar o dado para o próximo endereço da próxima vez
+
+00C3 B809EF           77                             CJNE    R0,#09H,VOLTA                   ;verifica se já não chegou 
+                             no endereço #35h
+
+00C6 7800             78                             MOV             R0,#00H                                 ;se já tive
+                             r terminado, recarrega o r0 para ficar cíclico
+
+00C8 80EB             79                             JMP             VOLTA                                   ;volta para
+                              o ciclo
+
+                      80                             
+
+00CA C279             81     ENVIADADOS:     CLR             STATE1                                  ;após interrupção z
+                             era-se a variável
+
+00CC 09               82                             INC             R1                                              ;in
+                             crementa-se r1 para enviar o dado seguinte
+
+00CD 8799             83                             MOV             SBUF,@R1                                ;envia o da
+                             do para SBUF (que enviará para a uart#1)
+
+A51 MACRO ASSEMBLER  LAB7_4                                                               06/24/2017 11:28:17 PAGE     3
+
+00CF B962E3           84                             CJNE    R1,#62H,VOLTA                   ;testa o endereço do dado e
+                             nviado para ver se já não foram todos os dados
+
+00D2 7940             85                             MOV             R1,#40H                                 ;caso já te
+                             nham ido todos, ele reseta r1 para começar de novo
+
+00D4 80DF             86                             JMP             VOLTA                                   ;e volta pa
+                             ra o ciclo
+
+                      87                                                     
+
+                      88                             END
+
+A51 MACRO ASSEMBLER  LAB7_4                                                               06/24/2017 11:28:17 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ENVIADADOS . . . .  C ADDR   00CAH   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+INICIO . . . . . .  C ADDR   0031H   A   
+INICIO2. . . . . .  C ADDR   0094H   A   
+LTSERIAL . . . . .  N NUMB   0023H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+RECEBE . . . . . .  C ADDR   002CH   A   
+RESET. . . . . . .  N NUMB   0000H   A   
+RETIS. . . . . . .  C ADDR   0030H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+STATE1 . . . . . .  B ADDR   002FH.1 A   
+STATE2 . . . . . .  B ADDR   002FH.2 A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+VOLTA. . . . . . .  C ADDR   00B5H   A   
+VOLTA1 . . . . . .  C ADDR   00BAH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

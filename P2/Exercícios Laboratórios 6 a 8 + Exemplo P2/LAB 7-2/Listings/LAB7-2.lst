@@ -1,0 +1,218 @@
+A51 MACRO ASSEMBLER  LAB7_2                                                               06/24/2017 18:09:14 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\LAB7-2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LAB7-2.asm SET(SMALL) DEBUG PRINT(.\Listings\LAB7-2.lst) OBJECT(.\Objec
+                      ts\LAB7-2.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0000                 1     RESET           EQU             00H                                     ;endereço do ínicio
+                              do programa
+
+  0023                 2     LTSERIAL        EQU             23H                                     ;endereço do tratad
+                             or de interrupção serial
+
+  0020                 3     STATE           EQU             20H                                     ;endereço de variáv
+                             el de teste alterada na LTSERIAL
+
+                       4     
+
+0000                   5                             ORG             RESET                           ;início do programa
+
+0000 8027              6                             JMP             INICIO                          ;pula para o início
+
+                       7                             
+
+0023                   8                             ORG             LTSERIAL                        ;início do tratador
+                              de interrupção
+
+0023 C299              9                             CLR             TI                                      ;limpa o fl
+                             ag que chama a interrupção
+
+0025 752001           10                             MOV             STATE,#1H                       ;seta a variável de
+                              teste para sair do ciclo
+
+0028 32               11                             RETI                                            ;retorna ao program
+                             a
+
+                      12                             
+
+0029 754101           13     INICIO:         MOV             41H,#01H                        ;aqui são salvos vários dad
+                             os nos endereços de #41h até #61h para serem transferidos
+
+002C 754202           14                             MOV             42H,#02H                        ;através da interfa
+                             ce serial (proposta do exercício)
+
+002F 754303           15                             MOV             43H,#03H
+
+0032 754404           16                             MOV             44H,#04H
+
+0035 754502           17                             MOV             45H,#02H
+
+0038 754602           18                             MOV             46H,#02H
+
+003B 754702           19                             MOV             47H,#02H
+
+003E 754802           20                             MOV             48H,#02H
+
+0041 754902           21                             MOV             49H,#02H
+
+0044 754A02           22                             MOV             4AH,#02H
+
+0047 754B02           23                             MOV             4BH,#02H
+
+004A 754C02           24                             MOV             4CH,#02H
+
+004D 754D02           25                             MOV             4DH,#02H
+
+0050 754E02           26                             MOV             4EH,#02H
+
+0053 754F02           27                             MOV             4FH,#02H
+
+0056 755002           28                             MOV             50H,#02H
+
+0059 755101           29                             MOV             51H,#01H
+
+005C 755202           30                             MOV             52H,#02H
+
+005F 755303           31                             MOV             53H,#03H
+
+0062 755404           32                             MOV             54H,#04H
+
+0065 755502           33                             MOV             55H,#02H
+
+0068 755602           34                             MOV             56H,#02H
+
+006B 755702           35                             MOV             57H,#02H
+
+006E 755802           36                             MOV             58H,#02H
+
+0071 755902           37                             MOV             59H,#02H
+
+0074 755A02           38                             MOV             5AH,#02H
+
+0077 755B02           39                             MOV             5BH,#02H
+
+007A 755C02           40                             MOV             5CH,#02H
+
+007D 755D02           41                             MOV             5DH,#02H
+
+0080 755E02           42                             MOV             5EH,#02H
+
+0083 755F02           43                             MOV             5FH,#02H
+
+0086 756002           44                             MOV             60H,#02H
+
+0089 756102           45                             MOV             61H,#02H
+
+                      46                             
+
+008C 75A890           47     INICIO2:        MOV             IE,#10010000B                   ;habilita a ocorrência de i
+                             nterrupção serial
+
+A51 MACRO ASSEMBLER  LAB7_2                                                               06/24/2017 18:09:14 PAGE     2
+
+008F 7598C0           48                             MOV             SCON,#11000000B                 ;pela frequência de
+                             sejada, é preciso utilizar o serial no modo 3
+
+0092 758920           49                             MOV             TMOD,#00100000B                 ;pela frequência de
+                             sejada, é preciso utilizar timer1 no modo 2
+
+0095 758DFF           50                             MOV             TH1,#0FFH                               ;valor tabe
+                             lado para obtermos 62.5kibi 
+
+0098 758BFF           51                             MOV             TL1,#0FFH                               ;valor tabe
+                             lado para obtermos 62.5kibi
+
+009B 758780           52                             MOV             PCON,#10000000B                 ;para 62.5 kibi, sm
+                             od=1
+
+009E D28E             53                             SETB    TR1                                             ;começa a c
+                             ontar
+
+                      54                             
+
+00A0 752000           55                             MOV             STATE,#0H                               ;zera a var
+                             iável de teste
+
+00A3 7820             56                             MOV             R0,#STATE                               ;r0 aponta 
+                             para o endereço da variável
+
+00A5 7941             57                             MOV             R1,#41H                                 ;r1 aponta 
+                             para o endereço dos dados
+
+00A7 8999             58                             MOV             SBUF,R1                                 ;IMPORTANTE
+                             : para ocorrer a transmissão serial, o primeiro dado a ser transmitido
+
+                      59                                                                                             ;de
+                             ve ser enviado para SBUF antes de se entrar no ciclo, caso contrário as interrupções
+
+                      60                                                                                             ;se
+                             riais não serão atendidas
+
+                      61                             
+
+00A9 B601FD           62     VOLTA:          CJNE    @R0,#1,VOLTA                    ;fica em ciclo testando a variável 
+                             de teste
+
+00AC 752000           63                             MOV             STATE,#0H                               ;após inter
+                             rupção zera-se a variável
+
+00AF A2D0             64                             MOV             C,P                                             ;mo
+                             ve para C o bit de paridade
+
+00B1 929B             65                             MOV             TB8,C                                   ;move para 
+                             tb8, ou seja, será o nono bit a ser transmitido
+
+00B3 09               66                             INC             R1                                              ;in
+                             crementa-se r1 para enviar o dado seguinte
+
+00B4 8999             67                             MOV             SBUF,R1                                 ;envia o da
+                             do para SBUF (que enviará para a uart#1)
+
+00B6 B962F0           68                             CJNE    R1,#62H,VOLTA                   ;testa o endereço do dado e
+                             nviado para ver se já não foram todos os dados
+
+00B9 7940             69                             MOV             R1,#40H                                 ;caso já te
+                             nham ido todos, ele reseta r1 para começar de novo
+
+00BB 80EC             70                             JMP             VOLTA                                   ;e volta pa
+                             ra o ciclo
+
+                      71                                                     
+
+                      72                             END
+
+A51 MACRO ASSEMBLER  LAB7_2                                                               06/24/2017 18:09:14 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+IE . . . . . . . .  D ADDR   00A8H   A   
+INICIO . . . . . .  C ADDR   0029H   A   
+INICIO2. . . . . .  C ADDR   008CH   A   
+LTSERIAL . . . . .  N NUMB   0023H   A   
+P. . . . . . . . .  B ADDR   00D0H.0 A   
+PCON . . . . . . .  D ADDR   0087H   A   
+RESET. . . . . . .  N NUMB   0000H   A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+STATE. . . . . . .  N NUMB   0020H   A   
+TB8. . . . . . . .  B ADDR   0098H.3 A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+VOLTA. . . . . . .  C ADDR   00A9H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

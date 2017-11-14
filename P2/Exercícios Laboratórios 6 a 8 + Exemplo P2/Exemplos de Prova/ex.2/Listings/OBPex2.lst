@@ -1,0 +1,151 @@
+A51 MACRO ASSEMBLER  OBPEX2                                                               06/25/2017 09:59:59 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\OBPex2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE OBPex2.asm SET(SMALL) DEBUG PRINT(.\Listings\OBPex2.lst) OBJECT(.\Objec
+                      ts\OBPex2.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0000                 1     RESET           EQU             00H                                             ;endereço d
+                             a memória de programa inicial        
+
+  001B                 2     TIMER1          EQU             1BH                                             ;endereço d
+                             o tratador de interrupção do timer1
+
+  0078                 3     STATE           EQU             2FH.0                                   ;enndereço de variá
+                             vel de teste
+
+                       4             
+
+0000                   5                             ORG             RESET                                   ;começa o p
+                             rograma em 00h (reset)
+
+0000 801C              6                             JMP             INICIO                                  ;vai para o
+                              início do código
+
+                       7                             
+
+001B                   8                             ORG             TIMER1                                  ;começa o t
+                             ratador no endereço especificado
+
+001B D278              9                             SETB    STATE                                   ;seta a variável de
+                              teste para sair do loop
+
+001D 32               10                             RETI                                                    ;retorna ao
+                              programa
+
+                      11                             
+
+001E 75A888           12     INICIO:         MOV             IE,#10001000B                   ;habilita a interrupção do 
+                             timer1
+
+0021 758920           13                             MOV             TMOD,#20H                               ;especifica
+                              o timer1 no modo 2
+
+0024 758D60           14                             MOV             TH1,#60H                                ;define th1
+                              que vai recarregar tl1 ao término das contagens
+
+0027 758B60           15                             MOV             TL1,#60H                                ;tl1 será i
+                             ncrementado e a interrupção será solicitada quando chegar #0ffh
+
+                      16                             
+
+                      17                             ;TIMER1 NO MODO 2: deseja-se a transferência de um caractere a cada
+                              160 ciclos de instrução, no modo 2 a interrupção do
+
+                      18                             ;timer é solicitada sempre que tl1 atinge #0ffh. Dito isso é necess
+                             ário carregar tl1 com o valor de #255d-#159d=#60h para
+
+                      19                             ;a interrupção seja solicitada após 160 ciclos. Após a interrupção 
+                             tl1 será carregado automaticamente com o valor th1, por
+
+                      20                             ;é necessário também setar th1 com o valor #60h.
+
+                      21                             
+
+002A 75A010           22                             MOV             P2,#10H                                 ;MSB do end
+                             ereço de memória externa a ser utilizado
+
+002D 7800             23                             MOV             R0,#00H                                 ;r0 será us
+                             ado para definir o caractere e os LSB do endereço de memória externa
+
+002F 900044           24                             MOV             DPTR,#TABELA                    ;salva o endereço d
+                             a tabela de caracteres no dptr, para poder apontar depois
+
+0032 D28E             25                             SETB    TR1                                             ;começa a c
+                             ontagem do timer1
+
+                      26                             
+
+0034 3078FD           27     VOLTA:          JNB             STATE,VOLTA                             ;fica em um loop at
+                             é que a interrupção seja executada
+
+0037 C278             28                             CLR             STATE                                   ;limpa a va
+                             riável de teste para voltar ao loop depois
+
+0039 E8               29                             MOV             A,R0                                    ;joga-se em
+                              "a" qual o caracter da vez
+
+003A 93               30                             MOVC    A,@A+DPTR                               ;e busca-se esse ca
+                             ractere somando "a+dptr"
+
+003B F2               31                             MOVX    @R0,A                                   ;move-se o valor pa
+                             ra o endereço da memória externa da vez
+
+003C 08               32                             INC             R0                                              ;in
+                             crementa-se r0 para buscar o próximo valor e salvar no próximo endereço da memx
+
+A51 MACRO ASSEMBLER  OBPEX2                                                               06/25/2017 09:59:59 PAGE     2
+
+003D B60FF4           33                             CJNE    @R0,#15,VOLTA                   ;verifica se os 21 caracter
+                             es já não foram enviados
+
+0040 7800             34                             MOV             R0,#00H                                 ;em caso af
+                             irmativo, limpa-se r0 para começar de novo
+
+0042 80F0             35                             JMP     VOLTA                                   ;e volta para o loo
+                             p
+
+                      36                             
+
+0044 4D696372         37     TABELA:         DB              'Microcontrolador 8051' ;sequência de caracteres a ser envi
+                             ado para a memória externa
+
+0048 6F636F6E                
+004C 74726F6C                
+0050 61646F72                
+0054 20383035                
+0058 31                      
+                      38                             
+
+                      39                             END                                                             ;fi
+                             m do programa
+
+A51 MACRO ASSEMBLER  OBPEX2                                                               06/25/2017 09:59:59 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+IE . . . . . . . .  D ADDR   00A8H   A   
+INICIO . . . . . .  C ADDR   001EH   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+RESET. . . . . . .  N NUMB   0000H   A   
+STATE. . . . . . .  B ADDR   002FH.0 A   
+TABELA . . . . . .  C ADDR   0044H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TIMER1 . . . . . .  N NUMB   001BH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+VOLTA. . . . . . .  C ADDR   0034H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

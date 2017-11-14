@@ -1,0 +1,28 @@
+--cpu Cortex-M4.fp
+"aula8armdac\stm32f4xx_it.o"
+"aula8armdac\stm32f4xx_hal_msp.o"
+"aula8armdac\main.o"
+"aula8armdac\stm32f4xx_hal.o"
+"aula8armdac\stm32f4xx_hal_pwr.o"
+"aula8armdac\stm32f4xx_hal_gpio.o"
+"aula8armdac\stm32f4xx_hal_pwr_ex.o"
+"aula8armdac\stm32f4xx_hal_cortex.o"
+"aula8armdac\stm32f4xx_hal_tim_ex.o"
+"aula8armdac\stm32f4xx_hal_dac.o"
+"aula8armdac\stm32f4xx_hal_rcc.o"
+"aula8armdac\stm32f4xx_hal_dma_ex.o"
+"aula8armdac\stm32f4xx_hal_dac_ex.o"
+"aula8armdac\stm32f4xx_hal_rcc_ex.o"
+"aula8armdac\stm32f4xx_hal_tim.o"
+"aula8armdac\stm32f4xx_hal_flash.o"
+"aula8armdac\stm32f4xx_hal_dma.o"
+"aula8armdac\stm32f4xx_hal_flash_ramfunc.o"
+"aula8armdac\stm32f4xx_hal_flash_ex.o"
+"aula8armdac\stm32f4xx_hal_adc_ex.o"
+"aula8armdac\stm32f4xx_hal_adc.o"
+"aula8armdac\system_stm32f4xx.o"
+"aula8armdac\startup_stm32f429xx.o"
+--library_type=microlib --strict --scatter "aula8armDAC\aula8armDAC.sct"
+--diag_suppress=L6329 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "aula8armDAC.map" -o aula8armDAC\aula8armDAC.axf

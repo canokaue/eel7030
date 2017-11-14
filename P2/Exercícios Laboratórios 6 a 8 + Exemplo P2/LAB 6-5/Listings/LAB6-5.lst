@@ -1,0 +1,232 @@
+A51 MACRO ASSEMBLER  LAB6_5                                                               06/24/2017 09:46:00 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\LAB6-5.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LAB6-5.asm SET(SMALL) DEBUG PRINT(.\Listings\LAB6-5.lst) OBJECT(.\Objec
+                      ts\LAB6-5.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0000                 1     reset           equ   0h                                                                ;en
+                             dereço do início do programa
+
+  000B                 2     ltmr0           equ   0bh                                                               ;lo
+                             cal do tratador
+
+  0013                 3     intex1          equ       13h                                                           ;tr
+                             atador intex1
+
+  0020                 4     state       equ   20h                                                           ;endereço d
+                             e variável de teste para quebrar ciclo do timer0
+
+  0030                 5     state1          equ       30h                                                           ;en
+                             dereço da variável de teste para quebrar ciclo da intex1
+
+                       6     
+
+0000                   7                         org   reset                                                         ;PC
+                             =0 depois de reset
+
+0000 8013              8                             jmp   inicio                                                    ;va
+                             i para o início do programa
+
+                       9                             
+
+000B                  10                             org   ltmr0                                                        
+                                  ;faz a leitura do endereço do tratador do Itmr0
+
+000B 8049             11                             jmp       handlert                                                 
+                                  ;vai para o tratador do Itmr0
+
+                      12     
+
+0013                  13                             org       intex1                                                   
+                                  ;faz a leitura do endereço do tratador de intex1
+
+0013 8044             14                             jmp       handleri                                                 
+                                  ;vai para o tratador de intex1
+
+                      15     
+
+0015 75A886           16     inicio:         mov             ie,#10000110b                                   ;habilita t
+                             mr0 e intex1
+
+0018 D28A             17                             setb    it1                                                        
+                                  ;interrupção por borda de descida
+
+001A 758902           18                             mov     tmod,#02h                               ;define modo 2 para
+                              tmr0 
+
+001D 758C60           19                             mov     th0,#060h                                               ;se
+                             ta th0 no começo do programa
+
+0020 758A60           20                             mov     tl0,#060h                                               ;se
+                             ta tl0 para fazer a primeira contagem
+
+                      21                             
+
+                      22                             ;MODO 2: os registradores th0 e tl0 são definidos da seguinte forma
+                             : deseja-se que troque-se o caractere a cada 640 ciclos
+
+                      23                             ;de instrução, porém no modo 2 o tl0 funciona como contador e defin
+                             e (quando chega em #0ffh) que a interrupção do timer será
+
+                      24                             ;solicitada, porém #0ffh = #255d, então é necessário que há interru
+                             pção seja chamada mais de uma vez antes de ocorrer a troca
+
+                      25                             ;do caractere. No caso, o programa só sai do ciclo (linha31) quando
+                              a interrupção tiver sido chamada 4 vezes, então:
+
+                      26                             ;640/4 = 160, 255-160 = 95 = #05fh ==> ponto de partida #060h
+
+                      27                             
+
+0023 752000           28                             mov     state,#0h                                               ;de
+                             fine variável de teste (timer0) como sendo 0
+
+0026 7820             29                             mov     r0,#state                                               ;us
+                             a r0 como ponteiro para state
+
+0028 753000           30                             mov             state1,#0h                                         
+                                  ;define variável de teste (intex1) como sendo 0
+
+002B 7930             31                             mov             r1,#state1                                         
+                                  ;usa r1 como ponteiro para state1
+
+002D 90005D           32                             mov     dptr,#tabela                                    ;salva no d
+                             ptr o endereço das infos da tabela
+
+A51 MACRO ASSEMBLER  LAB6_5                                                               06/24/2017 09:46:00 PAGE     2
+
+0030 7A00             33                             mov     r2,#0                                                   ;r2
+                              será usado como teste para saber se já foram os 16 caracteres
+
+0032 D28C             34                             setb    tr0                                                        
+                                  ;inicia a contagem
+
+                      35     
+
+                      36                             ;No trecho seguinte do código, o programa vai ficar alternando entr
+                             e as linhas 40 e 42 para ver qual interrupção será 
+
+                      37                             ;solicitada primeiro...timer0 ou intex1, aquela que acontecer prime
+                             iro vai, através do seu tratador, direcionar o 
+
+                      38                             ;programa para mudar a porta p1 (timer0) ou mudar o tempo de contag
+                             em do timer0 (intex1)
+
+                      39     
+
+0034 B60402           40     volta:          cjne    @r0,#4,volta1                                   ;@r0 é incrementado
+                              a cada 160 ciclos, por isso "#4"
+
+0037 800E             41                             jmp             cgcar                                              
+                                  ;pula para trecho que vai mudar a porta p1
+
+0039 B701F8           42     volta1:         cjne    @r1,#1,volta                                    ;vai sair do ciclo 
+                             caso intex1 seja solicitada
+
+                      43     
+
+003C 753000           44                             mov             state1,#0h                                         
+                                  ;zera a variável de teste da intex1
+
+003F E5A0             45                             mov             a,p2                                               
+                                  ;joga em "a" o valor de p2
+
+0041 F58C             46                             mov             th0,a                                              
+                                  ;envia para th0
+
+0043 F58A             47                             mov             tl0,a                                              
+                                  ;e para tl0
+
+0045 80ED             48                             jmp             volta                                              
+                                  ;volta para o ciclo das linhas 40 e 42
+
+                      49     
+
+0047 752000           50     cgcar:          mov     state,#0h                                               ;zera a var
+                             iável de teste do timer0
+
+004A EA               51                             mov     a,r2                                                    ;de
+                             fine qual o caracter a ser jogado em p1
+
+004B 93               52                             movc    a,@a+dptr                                               ;sa
+                             lva em A o valor do caracter da vez
+
+004C F590             53                             mov     p1,a                                                    ;jo
+                             ga em p1
+
+004E 0A               54                             inc     r2                                                         
+                                  ;incrementa r2 para que da próxima busque-se o caracter seguinte
+
+004F BA10E2           55                             cjne    r2,#16,volta                                    ;testa se j
+                             á não foram os 16 caracteres
+
+0052 7A00             56                             mov     r2,#0h                                                  ;co
+                             mo é cíclico ele zera r2
+
+0054 80DE             57                             jmp     volta                                                   ;vo
+                             lta para o começo
+
+                      58     
+
+0056 0520             59     handlert:   inc   state                                                         ;aumenta a 
+                             variável de teste para sair do ciclo
+
+0058 32               60                             reti                                                               
+                                  ;retorna ao programa
+
+                      61     
+
+0059 753001           62     handleri:       mov       state1,#1                                                     ;se
+                             ta a variável de teste para sair do ciclo
+
+005C 32               63                             reti                                                               
+                                  ;retorna ao programa
+
+                      64     
+
+005D 4D696372         65     tabela:         db 'Microcontrolador'                                   ;caracteres a serem
+                              jogados em p1
+
+0061 6F636F6E                
+0065 74726F6C                
+0069 61646F72                
+                      66                             end 
+
+A51 MACRO ASSEMBLER  LAB6_5                                                               06/24/2017 09:46:00 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CGCAR. . . . . . .  C ADDR   0047H   A   
+HANDLERI . . . . .  C ADDR   0059H   A   
+HANDLERT . . . . .  C ADDR   0056H   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+INICIO . . . . . .  C ADDR   0015H   A   
+INTEX1 . . . . . .  N NUMB   0013H   A   
+IT1. . . . . . . .  B ADDR   0088H.2 A   
+LTMR0. . . . . . .  N NUMB   000BH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+RESET. . . . . . .  N NUMB   0000H   A   
+STATE. . . . . . .  N NUMB   0020H   A   
+STATE1 . . . . . .  N NUMB   0030H   A   
+TABELA . . . . . .  C ADDR   005DH   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+VOLTA. . . . . . .  C ADDR   0034H   A   
+VOLTA1 . . . . . .  C ADDR   0039H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

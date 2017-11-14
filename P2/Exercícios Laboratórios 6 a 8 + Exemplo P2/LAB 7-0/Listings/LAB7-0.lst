@@ -1,0 +1,139 @@
+A51 MACRO ASSEMBLER  LAB7_0                                                               06/25/2017 20:37:20 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\LAB7-0.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LAB7-0.asm SET(SMALL) DEBUG PRINT(.\Listings\LAB7-0.lst) OBJECT(.\Objec
+                      ts\LAB7-0.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0000                 1     RESET           EQU     00H                                     ;começo do programa
+
+  0023                 2     LTSERIAL        EQU     23H                             ;local tratador de serial
+
+  0020                 3     STATE           EQU     20H                                     ;endereço da variável de te
+                             ste
+
+                       4     
+
+0000                   5                             ORG     RESET                           ;PC=0 depois de reset
+
+0000 8027              6                             JMP     INICIO                          ;pula para início do progra
+                             ma
+
+                       7     
+
+0023                   8                             ORG     LTSERIAL                        ;vai para endereço do trata
+                             dor
+
+0023 C299              9                             CLR     TI                                      ;limpa ff que solic
+                             itou a execução do tratador
+
+0025 752001           10                             MOV     STATE,#1H                       ;seta a variável de teste
+
+0028 32               11                             RETI                                            ;volta ao programa
+
+                      12     
+
+0029 75A890           13     INICIO:         MOV     IE,#10010000B           ;habilita interrupção serial
+
+002C 759840           14                             MOV     SCON,#01000000B         ;serial no modo 1 de funcionamento,
+                              define os valores de th1 e tl1 através da tabela na apostila
+
+002F 758920           15                             MOV     TMOD,#00100000B         ;modo 2 para o timer1
+
+0032 758DFD           16                             MOV     TH1,#0FDH                       ;deseja-se uma baud rate de
+                              9.6k no modo 1, logo th1 =#0fdh (tabela12 - pg.51)
+
+0035 758BFD           17                             MOV     TL1,#0FDH                       ;deseja-se uma baud rate de
+                              9.6k no modo 1, logo tl1 =#0fdh (tabela12 - pg.51)
+
+0038 758700           18                             MOV     PCON,#0H                        ;nesse modo para obter 9.6k
+                             , SMOD (FF de PCON) deve ser igual a 0
+
+003B D28E             19                             SETB    TR1                                     ;começa a contar
+
+                      20                             
+
+003D 752000           21                             MOV     STATE,#0H                       ;zera a variável de teste
+
+0040 7820             22                             MOV     R0,#STATE                       ;salva o endereço da variáv
+                             el de teste
+
+0042 90005C           23                             MOV     DPTR,#TABELA            ;salva o endereço dos valores
+
+0045 7901             24                             MOV     R1,#1                           ;contador para ver se já fo
+                             ram os 16 caracteres
+
+0047 75994D           25                             MOV     SBUF,#'M'                       ;joga o primeiro caractere 
+                             em SBUF, se não fizer isso o programa não chama a interrupção serial
+
+                      26     
+
+004A B601FD           27     VOLTA:          CJNE    @R0,#1,VOLTA            ;fica em um ciclo até chamar a interrupção 
+                             serial
+
+004D 752000           28                             MOV     STATE,#0H                       ;zera a variável
+
+0050 E9               29                             MOV     A,R1                            ;joga em a o número do cara
+                             ctere da vez
+
+0051 93               30                             MOVC    A,@A+DPTR                       ;soma ao endereço de dptr e
+                              salva o valor do caractere em A
+
+0052 F599             31                             MOV     SBUF,A                          ;manda para SBUF, o 8051 en
+                             via sozinho para a interface serial
+
+0054 09               32                             INC     R1                                      ;incrementa r1 para
+                              registrar que mais um caractere foi enviado
+
+0055 B910F2           33                             CJNE    R1,#16,VOLTA            ;testa se já não foram os 16 caract
+                             eres
+
+0058 C28E             34                             CLR     TR1                                     ;em caso afirmativo
+                              ele para de contar
+
+005A 80FE             35                             JMP     $                                       ;e fica aqui de bue
+                             nas
+
+                      36     
+
+005C 4D696372         37     TABELA:         DB              'Microcontrolador'
+
+0060 6F636F6E                
+A51 MACRO ASSEMBLER  LAB7_0                                                               06/25/2017 20:37:20 PAGE     2
+
+0064 74726F6C                
+0068 61646F72                
+                      38                             END
+
+A51 MACRO ASSEMBLER  LAB7_0                                                               06/25/2017 20:37:20 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+IE . . . . . . . .  D ADDR   00A8H   A   
+INICIO . . . . . .  C ADDR   0029H   A   
+LTSERIAL . . . . .  N NUMB   0023H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+RESET. . . . . . .  N NUMB   0000H   A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+STATE. . . . . . .  N NUMB   0020H   A   
+TABELA . . . . . .  C ADDR   005CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+VOLTA. . . . . . .  C ADDR   004AH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

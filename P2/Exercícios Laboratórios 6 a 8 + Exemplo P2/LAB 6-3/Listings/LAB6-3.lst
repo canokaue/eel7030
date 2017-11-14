@@ -1,0 +1,163 @@
+A51 MACRO ASSEMBLER  LAB6_3                                                               06/24/2017 09:15:30 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\LAB6-3.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LAB6-3.asm SET(SMALL) DEBUG PRINT(.\Listings\LAB6-3.lst) OBJECT(.\Objec
+                      ts\LAB6-3.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0000                 1     reset           equ   0h                                                                ;en
+                             dereço do início do programa
+
+  000B                 2     ltmr0           equ   0bh                                                               ;lo
+                             cal do tratador
+
+  0020                 3     state       equ   20h                                                           ;endereço d
+                             e variável de teste
+
+                       4     
+
+0000                   5                         org   reset                                                         ;PC
+                             =0 depois de reset
+
+0000 800C              6                             jmp   inicio                                                    ;va
+                             i para o início do programa
+
+                       7                             
+
+000B                   8                             org   ltmr0                                                        
+                                  ;faz a leitura do endereço do tratador do tmr0
+
+000B 0520              9                             inc       state                                                    
+                                  ;seta a variável de teste para sair do ciclo
+
+000D 32               10                             reti
+
+                      11     
+
+000E 75A882           12     inicio:         mov             ie,#10000010b                                   ;habilita t
+                             mr0 
+
+0011 758902           13                             mov     tmod,#02h                               ;define modo 2 para
+                              tmr0 
+
+0014 758C60           14                             mov     th0,#060h                                               ;se
+                             ta th0 no começo do programa
+
+0017 758A60           15                             mov     tl0,#060h                                               ;se
+                             ta tl0 para fazer a primeira contagem
+
+                      16                             
+
+                      17                             ;MODO 2: os registradores th0 e tl0 são definidos da seguinte forma
+                             : deseja-se que troque-se o caractere a cada 640 ciclos
+
+                      18                             ;de instrução, porém no modo 2 o tl0 funciona como contador e defin
+                             e (quando chega em #0ffh) que a interrupção do timer será
+
+                      19                             ;solicitada, porém #0ffh = #255d, então é necessário que há interru
+                             pção seja chamada mais de uma vez antes de ocorrer a troca
+
+                      20                             ;do caractere. No caso, o programa só sai do ciclo (linha32) quando
+                              a interrupção tiver sido chamada 4 vezes, então:
+
+                      21                             ;640/4 = 160, 255-160 = 95 = #05fh ==> ponto de partida #060h
+
+                      22                             
+
+                      23                             ;é importante ressaltar que, ao contrário dos modos 0, 1 e 3, no mo
+                             do 2 não é preciso recarregar os valores th0 e tl0
+
+                      24                             ;no tratador de interrupção, o tl0 sempre vai receber o valor espec
+                             ificado para th0 no programa.
+
+                      25                             
+
+001A 752000           26                             mov     state,#0h                                               ;de
+                             fine variável de teste com sendo 0
+
+001D 7820             27                             mov     r0,#state                                               ;sa
+                             lva o endereço da variável em r0
+
+001F 900038           28                             mov     dptr,#tabela                                    ;salva no d
+                             ptr o endereço das infos da tabela
+
+0022 7900             29                             mov     r1,#0                                                   ;r1
+                              será usado como teste para saber se já foram os 16 caracteres
+
+0024 D28C             30                             setb    tr0                                                        
+                                  ;inicia a contagem
+
+                      31                                     
+
+0026 B604FD           32     volta:          cjne    @r0,#4,volta                                    ;fica preso até aca
+                             bar a contagem e chamar a interrupção
+
+                      33     
+
+0029 752000           34                             mov     state,#0h                                               ;re
+A51 MACRO ASSEMBLER  LAB6_3                                                               06/24/2017 09:15:30 PAGE     2
+
+                             cupera valor de state
+
+002C E9               35                             mov     a,r1                                                    ;de
+                             fine qual o caracter a ser jogado em p1
+
+002D 93               36                             movc    a,@a+dptr                                               ;sa
+                             lva em A o valor do caracter da vez
+
+002E F590             37                             mov     p1,a                                                    ;jo
+                             ga em p1
+
+0030 09               38                             inc     r1                                                         
+                                  ;incrementa r1 para que da próxima busque-se o caracter seguinte
+
+0031 B910F2           39                             cjne    r1,#16,volta                                    ;testa se j
+                             á não foram os 16 caracteres
+
+0034 7900             40                             mov             r1,#0                                              
+                                  ;reseta r1
+
+0036 80EE             41                             jmp     volta                                                   ;vo
+                             lta para o ciclo
+
+                      42                             
+
+0038 4D696372         43     tabela:         db 'Microcontrolador'                                   ;caracteres a serem
+                              jogados em p1
+
+003C 6F636F6E                
+0040 74726F6C                
+0044 61646F72                
+                      44     
+
+                      45                             end 
+
+A51 MACRO ASSEMBLER  LAB6_3                                                               06/24/2017 09:15:30 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+IE . . . . . . . .  D ADDR   00A8H   A   
+INICIO . . . . . .  C ADDR   000EH   A   
+LTMR0. . . . . . .  N NUMB   000BH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+RESET. . . . . . .  N NUMB   0000H   A   
+STATE. . . . . . .  N NUMB   0020H   A   
+TABELA . . . . . .  C ADDR   0038H   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+VOLTA. . . . . . .  C ADDR   0026H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,24 @@
+--cpu Cortex-M4.fp
+"aula4armtimercounter\startup_stm32f429xx.o"
+"aula4armtimercounter\stm32f4xx_hal_msp.o"
+"aula4armtimercounter\main.o"
+"aula4armtimercounter\stm32f4xx_it.o"
+"aula4armtimercounter\stm32f4xx_hal_cortex.o"
+"aula4armtimercounter\stm32f4xx_hal_flash.o"
+"aula4armtimercounter\stm32f4xx_hal_tim_ex.o"
+"aula4armtimercounter\stm32f4xx_hal_flash_ex.o"
+"aula4armtimercounter\stm32f4xx_hal_rcc_ex.o"
+"aula4armtimercounter\stm32f4xx_hal.o"
+"aula4armtimercounter\stm32f4xx_hal_tim.o"
+"aula4armtimercounter\stm32f4xx_hal_flash_ramfunc.o"
+"aula4armtimercounter\stm32f4xx_hal_rcc.o"
+"aula4armtimercounter\stm32f4xx_hal_dma_ex.o"
+"aula4armtimercounter\stm32f4xx_hal_gpio.o"
+"aula4armtimercounter\stm32f4xx_hal_dma.o"
+"aula4armtimercounter\stm32f4xx_hal_pwr.o"
+"aula4armtimercounter\stm32f4xx_hal_pwr_ex.o"
+"aula4armtimercounter\system_stm32f4xx.o"
+--library_type=microlib --strict --scatter "aula4ARMtimerCounter\aula4ARMtimerCounter.sct"
+--diag_suppress=L6329 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "aula4ARMtimerCounter.map" -o aula4ARMtimerCounter\aula4ARMtimerCounter.axf

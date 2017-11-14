@@ -1,0 +1,34 @@
+Laboratório 6
+
+6.0 >> Enviar caracteres pra P1 a cada 100 ciclos com TIMER0 no modo 1
+6.1 >> Enviar caracteres pra P1 a cada 640 ciclos com TIMER0 no modo 1
+6.2 >> Enviar caracteres pra P1 a cada 640 ciclos com TIMER1 no modo 0
+6.3 >> Enviar car. ciclicamente pra P1 a cada 640 ciclos com TIMER0 no modo 2
+6.4 >> 6.3 + alterar p2.3 a cada 960 ciclos com TIMER1 no modo 0
+6.5 >> 6.3 + intex1 que, através de p2, redefine valores de th0 e tl0
+
+Laboratório 7
+
+7.0 >> Transmissão assíncrona sem paridade (modo 1), br = 9,6k
+7.1 >> Recebe dados e salva ciclicamente em memória interna 
+7.2 >> Envia dados de memória interna para interface com bit de paridade, br=62,5k
+7.3 >> 7.2 + Receber dados e salvar na memória interna
+7.4 >> Enviar dados de memória interna para interface sem bit de paridade 
+com br=19,2k, também deve receber dados e salvá-los ciclicamente em memória externa 
+
+
+Laboratório 8
+
+8.1 >> Mostra contagem decrescente no display 3
+8.2 >> Mostra valor das chaves em P2 no display 0
+8.3 >> Mostra numero de chaves fechadas no display 1
+8.4 >> Rotaciona leds ciclicamente na porta P1
+8.5 >> Acende e apaga leds ordenadamente com delay
+
+
+Exemplos de Prova
+
+ex1 >> Receber bits à 1.2k e salvar ciclicamente em memória externa
+ex2 >> Timer1 no modo 2 para enviar caracteres para memória externa ciclicamente
+ex3 >> Transmitir (4.8k) ciclicamente caracteres, e salvar num de car. enviados em mem. externa
+ex4 >> Receber 9bits e dependendo do nono bit salvar o valor em memória interna (ciclicamente) ou externa
